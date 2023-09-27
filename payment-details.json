@@ -520,26 +520,7 @@
                                   "it": "Provider di pagamento",
                                   "en": "Payment provider"
                                 },
-                                "type": "string",
-                                "visualizationOptions": {
-                                  "tag": "img",
-                                  "properties": {
-                                    "src": {
-                                      "template": "{{args.[0]}}",
-                                      "configMap": {
-                                        "axerve": "https://miafintech-demo-fintech.cloud.azure.mia-fintech.io/logo/download/64ef515a4b04580ab7b37c2b.png",
-                                        "satispay": "https://miafintech-demo-fintech.cloud.azure.mia-fintech.io/logo/download/64ef516e4b04580ab7b37c2f.png",
-                                        "braintree": "https://miafintech-demo-fintech.cloud.azure.mia-fintech.io/logo/download/64ef517a4b04580ab7b37c31.png",
-                                        "soisy": "https://miafintech-demo-fintech.cloud.azure.mia-fintech.io/logo/download/64ef51434b04580ab7b37c27.png",
-                                        "stripe": "https://miafintech-demo-fintech.cloud.azure.mia-fintech.io/logo/download/64ef50da4b04580ab7b37c23.png",
-                                        "adyen": "https://miafintech-demo-fintech.cloud.azure.mia-fintech.io/logo/download/64ef51434b04580ab7b37c27.png",
-                                        "scalapay": "https://miafintech-demo-fintech.cloud.azure.mia-fintech.io/logo/download/64ef51664b04580ab7b37c2d.png",
-                                        "$default": ""
-                                      }
-                                    },
-                                    "width": "80"
-                                  }
-                                }
+                                "type": "string"
                               },
                               "amount": {
                                 "label": {
