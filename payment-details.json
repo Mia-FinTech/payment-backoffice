@@ -1,1031 +1,1130 @@
 {
-    "$id": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/templates/blank.json#",
-    "$schema": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/engine/schemas/template.schema.json#",
-    "meta": {
-      "label": {
-        "en": "Payment - Details",
-        "it": "Pagamenti - Dettaglio"
-      },
-      "description": {
-        "en": "View payment details",
-        "it": "Dettaglio pagamento"
-      }
+  "$id": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/templates/blank.json#",
+  "$schema": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/engine/schemas/template.schema.json#",
+  "meta": {
+    "label": {
+      "en": "Payment - Details",
+      "it": "Pagamenti - Dettaglio"
     },
-    "template": {
-      "definitions": {
-        "dataSchema": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "label": "ID",
-              "type": "string",
-              "visualizationOptions": {
-                "hidden": true
-              },
-              "formOptions": {
-                "hidden": true
-              },
-              "filtersOptions": {
-                "hidden": true
-              }
+    "description": {
+      "en": "View payment details",
+      "it": "Dettaglio pagamento"
+    }
+  },
+  "template": {
+    "definitions": {
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "label": "ID",
+            "type": "string",
+            "visualizationOptions": {
+              "hidden": true
             },
-            "__STATE__": {
-              "label": {
-                "en": "State",
-                "it": "Stato"
-              },
-              "type": "string",
-              "enum": [
-                "PUBLIC",
-                "DRAFT"
-              ],
-              "default": "PUBLIC",
-              "visualizationOptions": {
-                "iconMap": {
-                  "PUBLIC": {
-                    "shape": "roundedSquare",
-                    "color": "#52C41A"
-                  },
-                  "DRAFT": {
-                    "shape": "roundedSquare",
-                    "color": "#CDCDCE"
-                  }
+            "formOptions": {
+              "hidden": true
+            },
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "__STATE__": {
+            "label": {
+              "en": "State",
+              "it": "Stato"
+            },
+            "type": "string",
+            "enum": [
+              "PUBLIC",
+              "DRAFT"
+            ],
+            "default": "PUBLIC",
+            "visualizationOptions": {
+              "iconMap": {
+                "PUBLIC": {
+                  "shape": "roundedSquare",
+                  "color": "#52C41A"
                 },
-                "hidden": true
+                "DRAFT": {
+                  "shape": "roundedSquare",
+                  "color": "#CDCDCE"
+                }
               },
-              "formOptions": {
-                "hiddenOnUpdate": true
-              },
-              "filtersOptions": {
-                "hidden": true
-              }
+              "hidden": true
             },
-            "currentStatus": {
-              "label": {
-                "en": "Status",
-                "it": "Stato"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
-              },
-              "excludeFromSearch": true,
-              "enum": [
-                "Failed",
-                "Totally Refunded",
-                "Partially Refunded",
-                "Paid",
-                "Created"
-              ],
-              "visualizationOptions": {
-                "tag": "bk-chip",
-                "properties": {
-                  "value": "{{args.[0]}}",
-                  "title": "{{args.[0]}}",
-                  "valueMap": {
-                    "Paid": {
-                      "label": {
-                        "en": "✓",
-                        "it": "✓"
-                      },
-                      "color": "#349E47"
+            "formOptions": {
+              "hiddenOnUpdate": true
+            },
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "currentStatus": {
+            "label": {
+              "en": "Status",
+              "it": "Stato"
+            },
+            "type": "string",
+            "filtersOptions": {
+              "hidden": true
+            },
+            "excludeFromSearch": true,
+            "enum": [
+              "Failed",
+              "Totally Refunded",
+              "Partially Refunded",
+              "Paid",
+              "Created"
+            ],
+            "visualizationOptions": {
+              "tag": "bk-chip",
+              "properties": {
+                "value": "{{args.[0]}}",
+                "title": "{{args.[0]}}",
+                "valueMap": {
+                  "Paid": {
+                    "label": {
+                      "en": "✓",
+                      "it": "✓"
                     },
-                    "Failed": {
-                      "label": {
-                        "en": "✘",
-                        "it": "✘"
-                      },
-                      "color": "#F03838"
+                    "color": "#349E47"
+                  },
+                  "Failed": {
+                    "label": {
+                      "en": "✘",
+                      "it": "✘"
                     },
-                    "Totally Refunded": {
-                      "label": {
-                        "en": "↺",
-                        "it": "↺"
-                      },
-                      "color": "#542C9E"
+                    "color": "#F03838"
+                  },
+                  "Totally Refunded": {
+                    "label": {
+                      "en": "↺",
+                      "it": "↺"
                     },
-                    "Partially Refunded": {
-                      "label": {
-                        "en": "↺",
-                        "it": "↺"
-                      },
-                      "color": "#D574F2"
+                    "color": "#542C9E"
+                  },
+                  "Partially Refunded": {
+                    "label": {
+                      "en": "↺",
+                      "it": "↺"
                     },
-                    "Created": {
-                      "label": {
-                        "en": "∞",
-                        "it": "∞"
-                      },
-                      "color": "#FA6B02"
-                    }
+                    "color": "#D574F2"
+                  },
+                  "Created": {
+                    "label": {
+                      "en": "∞",
+                      "it": "∞"
+                    },
+                    "color": "#FA6B02"
                   }
                 }
               }
+            }
+          },
+          "date": {
+            "label": {
+              "en": "Date",
+              "it": "Data"
             },
-            "date": {
-              "label": {
-                "en": "Date",
-                "it": "Data"
-              },
-              "type": "string",
-              "format": "date-time",
-              "dateOptions": {
-                "displayFormat": "YYYY-MM-DD"
+            "type": "string",
+            "format": "date-time",
+            "dateOptions": {
+              "displayFormat": "YYYY-MM-DD HH:mm:ss"
+            }
+          },
+          "shopTransactionId": {
+            "label": {
+              "en": "Transaction ID",
+              "it": "ID Transazione"
+            },
+            "type": "string",
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "paymentId": {
+            "type": "string",
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "amount": {
+            "label": {
+              "en": "Amount",
+              "it": "Importo"
+            },
+            "type": "number",
+            "format": "currency",
+            "formOptions": {
+              "template": {
+                "en": "€ {{nFormat '2.,' value}}",
+                "it": "{{nFormat '2.,' value}} €"
               }
             },
-            "shopTransactionId": {
-              "label": {
-                "en": "Transaction ID",
-                "it": "ID Transazione"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
+            "visualizationOptions": {
+              "template": {
+                "en": "€ {{nFormat '2.,' args.[0]}}",
+                "it": "{{nFormat '2.,' args.[0]}} €"
               }
+            }
+          },
+          "paymentMethod": {
+            "label": {
+              "en": "Method",
+              "it": "Metodo di pagamento"
             },
-            "paymentID": {
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
-              }
+            "type": "string",
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "paymentMethodId": {
+            "label": {
+              "en": "Method",
+              "it": "Metodo di pagamento"
             },
-            "amount": {
-              "label": {
-                "en": "Amount",
-                "it": "Importo"
-              },
-              "type": "number",
-              "format": "currency",
-              "formOptions": {
-                "template": {
-                  "en": "€ {{nFormat '2.,' value}}",
-                  "it": "{{nFormat '2.,' value}} €"
-                }
-              },
-              "visualizationOptions": {
-                "template": {
-                  "en": "€ {{nFormat '2.,' args.[0]}}",
-                  "it": "{{nFormat '2.,' args.[0]}} €"
-                }
-              }
+            "type": "string",
+            "filtersOptions": {
+              "hidden": true
             },
-            "paymentMethod": {
-              "label": {
-                "en": "Method",
-                "it": "Metodo di pagamento"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
-              }
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "provider": {
+            "label": {
+              "en": "Provider",
+              "it": "Provider"
             },
-            "provider": {
-              "label": {
-                "en": "Payment provider",
-                "it": "Fornitore di pagamento"
-              },
-              "visualizationOptions": {
-                "hidden": true
-              },
-              "filtersOptions": {
-                "hidden": true
-              },
-              "type": "string"
+            "type": "string",
+            "filtersOptions": {
+              "hidden": true
             },
-            "paymentMethodId": {
-              "label": {
-                "en": "Method",
-                "it": "Metodo di pagamento"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "channel": {
+            "label": {
+              "en": "Channel",
+              "it": "Canale"
             },
-            "providerId": {
-              "label": {
-                "en": "Provider",
-                "it": "Provider"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
+            "filtersOptions": {
+              "hidden": true
             },
-            "channel": {
-              "label": {
-                "en": "Channel",
-                "it": "Canale"
-              },
-              "filtersOptions": {
-                "hidden": true
-              },
-              "type": "string"
+            "type": "string"
+          },
+          "type": {
+            "label": {
+              "en": "Type",
+              "it": "Tipo"
             },
-            "type": {
-              "label": {
-                "en": "Type",
-                "it": "Tipo"
-              },
-              "filtersOptions": {
-                "hidden": true
-              },
-              "type": "string"
+            "filtersOptions": {
+              "hidden": true
             },
-            "creatorId": {
-              "label": {
-                "en": "User ID",
-                "it": "User ID"
-              },
-              "filtersOptions": {
-                "hidden": true
-              },
-              "type": "string"
+            "type": "string"
+          },
+          "creatorId": {
+            "label": {
+              "en": "User ID",
+              "it": "User ID"
             },
-            "buyerName": {
-              "label": {
-                "en": "Name",
-                "it": "Nome"
-              },
-              "filtersOptions": {
-                "hidden": true
-              },
-              "type": "string"
+            "filtersOptions": {
+              "hidden": true
             },
-            "buyerEmail": {
-              "label": {
-                "en": "Email",
-                "it": "Email"
-              },
-              "filtersOptions": {
-                "hidden": true
-              },
-              "type": "string"
+            "type": "string"
+          },
+          "buyerName": {
+            "label": {
+              "en": "Name",
+              "it": "Nome"
             },
-            "history": {
-              "label": {
-                "en": "History",
-                "it": "Storico"
-              },
-              "type": "array"
+            "filtersOptions": {
+              "hidden": true
             },
-            "sagaId": {
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
+            "type": "string"
+          },
+          "buyerEmail": {
+            "label": {
+              "en": "Email",
+              "it": "Email"
             },
-            "totalRefundedAmount": {
-              "type": "number",
-              "format": "currency",
-              "filtersOptions": {
-                "hidden": true
-              }
+            "filtersOptions": {
+              "hidden": true
             },
-            "remainingAmount": {
-              "type": "number"
+            "type": "string"
+          },
+          "buyerPhone": {
+            "label": {
+              "en": "Phone Number",
+              "it": "Cellulare"
             },
-            "currency": {
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
+            "filtersOptions": {
+              "hidden": true
+            },
+            "type": "string"
+          },
+          "notificationChannels": {
+            "label": {
+              "en": "Notification Channels",
+              "it": "Canali di Notifica"
+            },
+            "filtersOptions": {
+              "hidden": true
+            },
+            "type": "string",
+            "visualizationOptions": {
+              "joinDelimiter": ", "
+            }
+          },
+          "history": {
+            "label": {
+              "en": "History",
+              "it": "Storico"
+            },
+            "type": "array"
+          },
+          "sagaId": {
+            "type": "string",
+            "filtersOptions": {
+              "hidden": true
+            },
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "totalRefundedAmount": {
+            "type": "number",
+            "format": "currency",
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "remainingAmount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string",
+            "filtersOptions": {
+              "hidden": true
+            },
+            "visualizationOptions": {
+              "hidden": true
             }
           }
         }
-      },
-      "content": {
-        "content": [
-          {
-            "content": [
-              {
-                "properties": {
-                  "content": "",
-                  "type": "link",
-                  "iconId": "LeftOutlined",
-                  "clickConfig": {
-                    "type": "go-back"
-                  }
-                },
-                "tag": "bk-button"
-              },
-              {
-                "properties": {
-                  "content": {
-                    "en": "Transaction Detail",
-                    "it": "Dettaglio Transazione"
-                  }
-                },
-                "tag": "bk-title"
-              },
-              {
-                "tag": "bk-refresh-button",
-                "attributes": {
-                  "style": "margin: 0 1vw 0 0;"
+      }
+    },
+    "content": {
+      "content": [
+        {
+          "content": [
+            {
+              "properties": {
+                "content": "",
+                "type": "link",
+                "iconId": "LeftOutlined",
+                "clickConfig": {
+                  "type": "go-back"
                 }
+              },
+              "tag": "bk-button"
+            },
+            {
+              "properties": {
+                "content": {
+                  "en": "Transaction Detail",
+                  "it": "Dettaglio Transazione"
+                }
+              },
+              "tag": "bk-title"
+            },
+            {
+              "tag": "bk-refresh-button",
+              "attributes": {
+                "style": "margin: 0 1vw 0 0;"
               }
-            ],
-            "tag": "header",
-            "attributes": {
-              "style": "display: flex; flex-direction: row; align-items: center; gap: 10px; padding: 10px 20px; background-color: white;"
             }
-          },
-          {
-            "content": [
-              {
-                "tag": "bk-card",
-                "properties": {
-                  "customMessageOnAbsentDatum": "-",
-                  "customMessageOnAbsentLookup": "Not Found",
-                  "cardSchema": {
-                    "header": {
-                      "icon": "InfoCircleOutlined",
-                      "title": {
-                        "it": "Overview",
-                        "en": "Overview"
-                      }
-                    },
-                    "main": {
-                      "dataSchema": {
-                        "type": "object",
-                        "properties": {
-                          "shopTransactionId": {
-                            "label": {
-                              "it": "ID transazione",
-                              "en": "Transaction ID"
-                            },
-                            "type": "string"
+          ],
+          "tag": "header",
+          "attributes": {
+            "style": "display: flex; flex-direction: row; align-items: center; gap: 10px; padding: 10px 20px; background-color: white;"
+          }
+        },
+        {
+          "content": [
+            {
+              "tag": "bk-card",
+              "properties": {
+                "customMessageOnAbsentDatum": "-",
+                "customMessageOnAbsentLookup": "Not Found",
+                "cardSchema": {
+                  "header": {
+                    "icon": "InfoCircleOutlined",
+                    "title": {
+                      "it": "Overview",
+                      "en": "Overview"
+                    }
+                  },
+                  "main": {
+                    "dataSchema": {
+                      "type": "object",
+                      "properties": {
+                        "shopTransactionId": {
+                          "label": {
+                            "it": "ID transazione",
+                            "en": "Transaction ID"
                           },
-                          "date": {
-                            "label": {
-                              "it": "Data transazione",
-                              "en": "Transaction date"
+                          "type": "string"
+                        },
+                        "date": {
+                          "label": {
+                            "it": "Data transazione",
+                            "en": "Transaction date"
+                          },
+                          "type": "string",
+                          "format": "date-time",
+                          "dateOptions": {
+                            "displayFormat": "YYYY-MM-DD HH:mm:ss"
+                          }
+                        },
+                        "currentStatus": {
+                          "label": {
+                            "it": "Stato attuale",
+                            "en": "Current status"
+                          },
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "footer": {
+                    "buttons": {
+                      "tag": "bk-button",
+                      "content": {
+                        "en": "Download Invoice",
+                        "it": "Scarica Ricevuta"
+                      },
+                      "loadingOnAction": true,
+                      "action": {
+                        "type": "http",
+                        "config": {
+                          "label": "download-file",
+                          "url": "/payment/{{data.sagaId}}/invoice",
+                          "method": "GET",
+                          "triggeredBy": "download-invoice-button",
+                          "config": {
+                            "downloadAsFile": true,
+                            "headers": {
+                              "secret": "{{BACKOFFICE_API_KEY}}"
+                            }
+                          }
+                        }
+                      },
+                      "disabled": {
+                        "template": "{{data.currentStatus}}",
+                        "configMap": {
+                          "Paid": false,
+                          "$default": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "attributes": {
+                "style": " padding: 2em 4em 0; flex-grow: 1; position:relative; overflow:hidden; width: 100%"
+              }
+            },
+            {
+              "content": [
+                {
+                  "tag": "bk-card",
+                  "properties": {
+                    "customMessageOnAbsentDatum": "-",
+                    "customMessageOnAbsentLookup": "Not Found",
+                    "cardSchema": {
+                      "header": {
+                        "icon": "fas fa-address-book",
+                        "title": {
+                          "it": "Utente",
+                          "en": "User"
+                        }
+                      },
+                      "main": {
+                        "dataSchema": {
+                          "type": "object",
+                          "properties": {
+                            "creatorId": {
+                              "label": {
+                                "it": "ID utente",
+                                "en": "User ID"
+                              },
+                              "type": "string"
                             },
-                            "type": "string",
-                            "format": "date-time",
-                            "dateOptions": {
-                              "displayFormat": "YYYY-MM-DD"
+                            "buyerName": {
+                              "label": {
+                                "it": "Nome",
+                                "en": "Name"
+                              },
+                              "type": "string"
+                            },
+                            "buyerEmail": {
+                              "label": {
+                                "it": "Email",
+                                "en": "Email ID"
+                              },
+                              "type": "string"
+                            },
+                            "buyerPhone": {
+                              "label": {
+                                "en": "Phone Number",
+                                "it": "Cellulare"
+                              },
+                              "filtersOptions": {
+                                "hidden": true
+                              },
+                              "type": "string"
+                            },
+                            "notificationChannels": {
+                              "label": {
+                                "en": "Notification Channels",
+                                "it": "Canali di Notifica"
+                              },
+                              "filtersOptions": {
+                                "hidden": true
+                              },
+                              "type": "string",
+                              "visualizationOptions": {
+                                "joinDelimiter": ", "
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "footer": {
+                        "buttons": {
+                          "tag": "bk-button",
+                          "content": {
+                            "en": "Send Notification",
+                            "it": "Invia Notifica"
+                          },
+                          "loadingOnAction": true,
+                          "action": {
+                            "type": "http",
+                            "config": {
+                              "url": "/pgm-bff/send-email?sagaId={{data.sagaId}}",
+                              "method": "GET",
+                              "triggeredBy": "send-email-button",
+                              "config": {
+                                "headers": {
+                                  "secret": "{{BACKOFFICE_API_KEY}}"
+                                }
+                              }
                             }
                           },
-                          "currentStatus": {
-                            "label": {
-                              "it": "Stato attuale",
-                              "en": "Current status"
+                          "disabled": {
+                            "template": "{{data.currentStatus}}",
+                            "configMap": {
+                              "$default": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "attributes": {
+                    "style": "background-color: #f0f2f5; padding: 0 1em 0 0; width: 100%"
+                  }
+                },
+                {
+                  "tag": "bk-card",
+                  "properties": {
+                    "customMessageOnAbsentDatum": "-",
+                    "customMessageOnAbsentLookup": "Not Found",
+                    "cardSchema": {
+                      "header": {
+                        "icon": "fas fa-university",
+                        "title": {
+                          "it": "Pagamento",
+                          "en": "Payment"
+                        }
+                      },
+                      "main": {
+                        "dataSchema": {
+                          "type": "object",
+                          "properties": {
+                            "provider": {
+                              "label": {
+                                "it": "Provider di pagamento",
+                                "en": "Payment provider"
+                              },
+                              "type": "string",
+                              "visualizationOptions": {
+                                "tag": "img",
+                                "properties": {
+                                  "src": {
+                                    "template": "{{args.[0]}}",
+                                    "configMap": {
+                                      "axerve": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d8672ae3ab0fe143e88.png",
+                                      "satispay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d1072ae3ab0fe143e84.png",
+                                      "braintree": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d3172ae3ab0fe143e86.png",
+                                      "soisy": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cd072ae3ab0fe143e80.png",
+                                      "stripe": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2c5972ae3ab0fe143e7e.png",
+                                      "adyen": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/65816862ef0573692355d6f6.png",
+                                      "scalapay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cf372ae3ab0fe143e82.png",
+                                      "nexi": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/659bdbdcdd2b811ad6970850.png",
+                                      "flowpay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/65a16d08dd2b811ad6970852.png",
+                                      "$default": ""
+                                    }
+                                  },
+                                  "width": "80"
+                                }
+                              }
                             },
-                            "type": "string"
+                            "amount": {
+                              "label": {
+                                "it": "Importo",
+                                "en": "Amount"
+                              },
+                              "type": "number",
+                              "visualizationOptions": {
+                                "template": {
+                                  "en": "€ {{nFormat '2.,' args.[0]}}",
+                                  "it": "{{nFormat '2.,' args.[0]}} €"
+                                }
+                              }
+                            },
+                            "paymentMethod": {
+                              "label": {
+                                "it": "Metodo di pagamento",
+                                "en": "Payment method"
+                              },
+                              "type": "string"
+                            },
+                            "type": {
+                              "label": {
+                                "it": "Tipo",
+                                "en": "Type"
+                              },
+                              "type": "string"
+                            },
+                            "channel": {
+                              "label": {
+                                "it": "Canale",
+                                "en": "Channel"
+                              },
+                              "type": "string"
+                            },
+                            "totalRefundedAmount": {
+                              "label": {
+                                "it": "Totale importo stornato",
+                                "en": "Total refunded amount"
+                              },
+                              "type": "number",
+                              "format": "currency",
+                              "visualizationOptions": {
+                                "template": {
+                                  "en": "€ {{nFormat '2.,' args.[0]}}",
+                                  "it": "{{nFormat '2.,' args.[0]}} €"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "footer": {
+                        "buttons": {
+                          "tag": "bk-button",
+                          "content": {
+                            "en": "Refund",
+                            "it": "Storna"
+                          },
+                          "loadingOnAction": true,
+                          "action": {
+                            "type": "event",
+                            "config": {
+                              "events": {
+                                "label": "selected-data",
+                                "payload": "{{rawObject data}}"
+                              }
+                            },
+                            "hooks": {
+                              "onSuccess": {
+                                "type": "event",
+                                "config": {
+                                  "events": {
+                                    "label": "change-query",
+                                    "payload": {}
+                                  }
+                                }
+                              },
+                              "onError": {
+                                "type": "event",
+                                "config": {
+                                  "events": {
+                                    "label": "change-query",
+                                    "payload": {}
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "disabled": {
+                            "template": "{{data.currentStatus}}",
+                            "configMap": {
+                              "Paid": false,
+                              "Partially Refunded": false,
+                              "$default": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "attributes": {
+                    "style": "background-color: #f0f2f5; padding: 0 0 1em 0; width: 100%"
+                  }
+                },
+                {
+                  "tag": "bk-dynamic-form-modal",
+                  "properties": {
+                    "dataSchema": {
+                      "type": "object",
+                      "properties": {
+                        "remainingAmount": {
+                          "type": "number",
+                          "format": "currency",
+                          "minimum": 0,
+                          "label": {
+                            "en": "Amount",
+                            "it": "Importo"
+                          },
+                          "formOptions": {
+                            "template": {
+                              "en": "€ {{nFormat '2.,' value}}",
+                              "it": "{{nFormat '2.,' value}} €"
+                            }
+                          }
+                        },
+                        "sagaId": {
+                          "type": "string",
+                          "formOptions": {
+                            "hidden": true
+                          }
+                        },
+                        "currency": {
+                          "type": "string",
+                          "formOptions": {
+                            "hidden": true
                           }
                         }
                       }
                     },
-                    "footer": {
-                      "buttons": {
-                        "tag": "bk-button",
-                        "content": {
-                          "en": "Download Invoice",
-                          "it": "Scarica Ricevuta"
+                    "customLabels": {
+                      "create": {
+                        "ctaLabel": {
+                          "en": "Refund",
+                          "it": "Stornare"
                         },
-                        "loadingOnAction": true,
+                        "title": {
+                          "en": "Insert the amount to refund",
+                          "it": "Inserisci l'importo da stornare"
+                        }
+                      }
+                    },
+                    "omitSubmit": true,
+                    "width": "35vw",
+                    "height": "100%",
+                    "actions": [
+                      {
+                        "closeAfter": true,
+                        "content": "Refund",
+                        "type": "primary",
                         "action": {
                           "type": "http",
                           "config": {
-                            "label": "download-file",
-                            "url": "/pgm-bff/invoice-download?sagaId={{data.sagaId}}",
-                            "method": "GET",
-                            "triggeredBy": "download-invoice-button",
+                            "url": "/pgm-bff/refund",
+                            "method": "POST",
+                            "body": {
+                              "currency": "{{values.currency}}",
+                              "sagaId": "{{values.sagaId}}",
+                              "remainingAmount": "{{values.remainingAmount}}"
+                            },
                             "config": {
-                              "downloadAsFile": true
-                            }
-                          }
-                        },
-                        "disabled": {
-                          "template": "{{data.currentStatus}}",
-                          "configMap": {
-                            "Paid": false,
-                            "$default": true
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "attributes": {
-                  "style": " padding: 2em 4em 0; flex-grow: 1; position:relative; overflow:hidden; width: 100%"
-                }
-              },
-              {
-                "content": [
-                  {
-                    "tag": "bk-card",
-                    "properties": {
-                      "customMessageOnAbsentDatum": "-",
-                      "customMessageOnAbsentLookup": "Not Found",
-                      "cardSchema": {
-                        "header": {
-                          "icon": "fas fa-address-book",
-                          "title": {
-                            "it": "Utente",
-                            "en": "User"
-                          }
-                        },
-                        "main": {
-                          "dataSchema": {
-                            "type": "object",
-                            "properties": {
-                              "creatorId": {
-                                "label": {
-                                  "it": "ID utente",
-                                  "en": "User ID"
-                                },
-                                "type": "string"
-                              },
-                              "buyerName": {
-                                "label": {
-                                  "it": "Nome",
-                                  "en": "Name"
-                                },
-                                "type": "string"
-                              },
-                              "buyerEmail": {
-                                "label": {
-                                  "it": "Email",
-                                  "en": "Email ID"
-                                },
-                                "type": "string"
+                              "headers": {
+                                "secret": "{{BACKOFFICE_API_KEY}}"
                               }
                             }
-                          }
-                        },
-                        "footer": {
-                          "buttons": {
-                            "tag": "bk-button",
-                            "content": {
-                              "en": "Send Email",
-                              "it": "Invia Email"
-                            },
-                            "loadingOnAction": true,
-                            "action": {
-                              "type": "http",
-                              "config": {
-                                "url": "/pgm-bff/send-email?sagaId={{data.sagaId}}",
-                                "method": "GET",
-                                "triggeredBy": "send-email-button"
-                              }
-                            },
-                            "disabled": {
-                              "template": "{{data.currentStatus}}",
-                              "configMap": {
-                                "Created": true,
-                                "$default": false
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "attributes": {
-                      "style": "background-color: #f0f2f5; padding: 0 1em 0 0; width: 100%"
-                    }
-                  },
-                  {
-                    "tag": "bk-card",
-                    "properties": {
-                      "customMessageOnAbsentDatum": "-",
-                      "customMessageOnAbsentLookup": "Not Found",
-                      "cardSchema": {
-                        "header": {
-                          "icon": "fas fa-university",
-                          "title": {
-                            "it": "Pagamento",
-                            "en": "Payment"
-                          }
-                        },
-                        "main": {
-                          "dataSchema": {
-                            "type": "object",
-                            "properties": {
-                              "providerId": {
-                                "label": {
-                                  "it": "Provider di pagamento",
-                                  "en": "Payment provider"
-                                },
-                                "type": "string"
-                              },
-                              "amount": {
-                                "label": {
-                                  "it": "Importo",
-                                  "en": "Amount"
-                                },
-                                "type": "number",
-                                "visualizationOptions": {
-                                  "template": {
-                                    "en": "€ {{nFormat '2.,' args.[0]}}",
-                                    "it": "{{nFormat '2.,' args.[0]}} €"
-                                  }
-                                }
-                              },
-                              "paymentMethod": {
-                                "label": {
-                                  "it": "Metodo di pagamento",
-                                  "en": "Payment method"
-                                },
-                                "type": "string"
-                              },
-                              "type": {
-                                "label": {
-                                  "it": "Tipo",
-                                  "en": "Type"
-                                },
-                                "type": "string"
-                              },
-                              "channel": {
-                                "label": {
-                                  "it": "Canale",
-                                  "en": "Channel"
-                                },
-                                "type": "string"
-                              },
-                              "totalRefundedAmount": {
-                                "label": {
-                                  "it": "Totale importo stornato",
-                                  "en": "Total refunded amount"
-                                },
-                                "type": "number",
-                                "format": "currency",
-                                "visualizationOptions": {
-                                  "template": {
-                                    "en": "€ {{nFormat '2.,' args.[0]}}",
-                                    "it": "{{nFormat '2.,' args.[0]}} €"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "footer": {
-                          "buttons": {
-                            "tag": "bk-button",
-                            "content": {
-                              "en": "Refund",
-                              "it": "Storna"
-                            },
-                            "loadingOnAction": true,
-                            "action": {
+                          },
+                          "hooks": {
+                            "onFinish": {
                               "type": "event",
                               "config": {
                                 "events": {
-                                  "label": "add-new-external",
-                                  "payload": "{{rawObject data}}"
+                                  "label": "change-query",
+                                  "payload": {}
                                 }
-                              },
-                              "hooks": {
-                                "onSuccess": {
-                                  "type": "event",
-                                  "config": {
-                                    "events": {
-                                      "label": "change-query",
-                                      "payload": {}
-                                    }
-                                  }
-                                },
-                                "onError": {
-                                  "type": "event",
-                                  "config": {
-                                    "events": {
-                                      "label": "change-query",
-                                      "payload": {}
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "disabled": {
-                              "template": "{{data.currentStatus}}",
-                              "configMap": {
-                                "Paid": false,
-                                "Partially Refunded": false,
-                                "$default": true
                               }
                             }
                           }
                         }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "tag": "main",
+              "attributes": {
+                "style": "display: flex; flex-direction: row; align-items: start; background-color: #f0f2f5;  flex-grow: 1; position:relative; overflow:hidden;"
+              }
+            },
+            {
+              "tag": "bk-table",
+              "properties": {
+                "displayedDataPath": "data.[0].history",
+                "disableRowClick": true,
+                "disableRowSelection": true,
+                "dataSchema": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "label": {
+                        "en": "Date",
+                        "it": "Data"
+                      },
+                      "format": "date-time",
+                      "dateOptions": {
+                        "displayFormat": "YYYY-MM-DD HH:mm:ss"
+                      },
+                      "visualizationOptions": {
+                        "sortable": false
                       }
                     },
-                    "attributes": {
-                      "style": "background-color: #f0f2f5; padding: 0 0 1em 0; width: 100%"
-                    }
-                  },
-                  {
-                    "tag": "bk-form-modal",
-                    "properties": {
-                      "dataSchema": {
-                        "type": "object",
-                        "properties": {
-                          "remainingAmount": {
-                            "type": "number",
-                            "format": "currency",
-                            "minimum": 0,
-                            "label": {
-                              "en": "Amount",
-                              "it": "Importo"
-                            },
-                            "formOptions": {
-                              "template": {
-                                "en": "€ {{nFormat '2.,' value}}",
-                                "it": "{{nFormat '2.,' value}} €"
-                              }
-                            }
-                          },
-                          "sagaId": {
-                            "type": "string",
-                            "formOptions": {
-                              "hidden": true
-                            }
-                          },
-                          "currency": {
-                            "type": "string",
-                            "formOptions": {
-                              "hidden": true
-                            }
-                          }
-                        }
+                    "status": {
+                      "type": "string",
+                      "label": {
+                        "en": "Status",
+                        "it": "Stato"
                       },
-                      "extraEndpoint": "/pgm-bff/refund",
-                      "customLabels": {
-                        "create": {
-                          "ctaLabel": {
-                            "en": "Refund",
-                            "it": "Stornare"
-                          },
-                          "title": {
-                            "en": "Insert the amount to refund",
-                            "it": "Inserisci l'importo da stornare"
-                          }
-                        }
+                      "visualizationOptions": {
+                        "sortable": false
+                      }
+                    },
+                    "event": {
+                      "type": "string",
+                      "label": {
+                        "en": "Event",
+                        "it": "Evento"
                       },
-                      "width": "35vw",
-                      "height": "100%"
-                    }
-                  }
-                ],
-                "tag": "main",
-                "attributes": {
-                  "style": "display: flex; flex-direction: row; align-items: start; background-color: #f0f2f5;  flex-grow: 1; position:relative; overflow:hidden;"
-                }
-              },
-              {
-                "tag": "bk-table",
-                "properties": {
-                  "displayedDataPath": "data.[0].history",
-                  "disableRowClick": true,
-                  "disableRowSelection": true,
-                  "dataSchema": {
-                    "type": "object",
-                    "properties": {
-                      "date": {
-                        "type": "string",
-                        "label": {
-                          "en": "Date",
-                          "it": "Data"
-                        },
-                        "format": "date-time",
-                        "dateOptions": {
-                          "displayFormat": "YYYY-MM-DD HH:mm:ss"
-                        },
-                        "visualizationOptions": {
-                          "sortable": false
-                        }
+                      "visualizationOptions": {
+                        "sortable": false
+                      }
+                    },
+                    "refundedAmount": {
+                      "type": "number",
+                      "label": {
+                        "en": "Refunded amount",
+                        "it": "Importo stornato"
                       },
-                      "status": {
-                        "type": "string",
-                        "label": {
-                          "en": "Status",
-                          "it": "Stato"
-                        },
-                        "visualizationOptions": {
-                          "sortable": false
-                        }
-                      },
-                      "event": {
-                        "type": "string",
-                        "label": {
-                          "en": "Event",
-                          "it": "Evento"
-                        },
-                        "visualizationOptions": {
-                          "sortable": false
-                        }
-                      },
-                      "refundedAmount": {
-                        "type": "number",
-                        "label": {
-                          "en": "Refunded amount",
-                          "it": "Importo stornato"
-                        },
-                        "format": "currency",
-                        "visualizationOptions": {
-                          "sortable": false,
-                          "template": {
-                            "en": "€ {{nFormat '2.,' args.[0]}}",
-                            "it": "{{nFormat '2.,' args.[0]}} €"
-                          }
+                      "format": "currency",
+                      "visualizationOptions": {
+                        "sortable": false,
+                        "template": {
+                          "en": "€ {{nFormat '2.,' args.[0]}}",
+                          "it": "{{nFormat '2.,' args.[0]}} €"
                         }
                       }
                     }
                   }
-                },
-                "attributes": {
-                  "style": "background-color: #f0f2f5; padding: 2em 4em 0; flex-grow: 1; position:relative; overflow:hidden;"
-                }
-              }
-            ],
-            "tag": "main",
-            "attributes": {
-              "style": "flex-grow: 1; background-color: #f0f2f5; padding: 20px; overflow-y: auto;"
-            }
-          },
-          {
-            "tag": "bk-state-adapter",
-            "attributes": {
-              "style": "display: none;"
-            }
-          },
-          {
-            "tag": "bk-url-parameters",
-            "properties": {
-              "urlMask": "/backoffice/transaction-detail/:_id"
-            }
-          },
-          {
-            "properties": {
-              "basePath": "/fm-transactions-view",
-              "dataSchema": {
-                "$ref": "#/definitions/dataSchema"
-              }
-            },
-            "tag": "bk-crud-client"
-          },
-          {
-            "properties": {
-              "basePath": "/v2/file"
-            },
-            "tag": "bk-file-client"
-          },
-          {
-            "tag": "bk-file-manager"
-          },
-          {
-            "tag": "bk-confirmation-modal"
-          },
-          {
-            "tag": "bk-notifications",
-            "properties": {
-              "rootElementSelectors": "main.micro-lc-layout-content",
-              "successEventMap": {
-                "create-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Item successfully created",
-                    "it": "L'elemento è stato creato correttamente"
-                  },
-                  "type": "success"
-                },
-                "update-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Item successfully updated",
-                    "it": "L'elemento è stato aggiornato correttamente"
-                  },
-                  "type": "success"
-                },
-                "delete-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Item successfully deleted",
-                    "it": "L'elemento è stato eliminato correttamente"
-                  },
-                  "type": "success"
-                },
-                "post-http-generic-button": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Requested action executed successfully",
-                    "it": "L'azione richiesta è stata eseguita con successo"
-                  },
-                  "type": "success"
-                },
-                "get-http-generic-button": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Requested action executed successfully",
-                    "it": "L'azione richiesta è stata eseguita con successo"
-                  },
-                  "type": "success"
-                },
-                "download-invoice-button": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Invoice downloaded successfully",
-                    "it": "Ricevuta scaricata con successo"
-                  },
-                  "type": "success"
-                },
-                "send-email-button": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Email sent successfully",
-                    "it": "Email inviata con successo"
-                  },
-                  "type": "success"
-                },
-                "refund-button": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Payment refund request accepted, it will be processed",
-                    "it": "La richiesta di storno è stata presa in carico"
-                  },
-                  "type": "success"
-                },
-                "bk-form-modal-extra-endpoint": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Payment refund request accepted, it will be processed",
-                    "it": "La richiesta di storno è stata presa in carico"
-                  },
-                  "type": "success"
-                },
-                "success": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Requested action executed successfully",
-                    "it": "L'azione richiesta è stata eseguita con successo"
-                  },
-                  "type": "success"
                 }
               },
-              "errorEventMap": {
-                "create-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item creation",
-                    "it": "C'è stato un errore durante la creazione dell'elemento"
-                  },
-                  "type": "error"
+              "attributes": {
+                "style": "background-color: #f0f2f5; margin: 2em 0; flex-grow: 1; position:relative; overflow:hidden;"
+              }
+            }
+          ],
+          "tag": "main",
+          "attributes": {
+            "style": "flex-grow: 1; background-color: #f0f2f5; padding: 20px; overflow-y: auto;"
+          }
+        },
+        {
+          "tag": "bk-state-adapter",
+          "attributes": {
+            "style": "display: none;"
+          }
+        },
+        {
+          "tag": "bk-url-parameters",
+          "properties": {
+            "urlMask": "/backoffice/transaction-detail/:_id"
+          }
+        },
+        {
+          "properties": {
+            "basePath": "/fm-transactions-view",
+            "dataSchema": {
+              "$ref": "#/definitions/dataSchema"
+            },
+            "headers": {
+              "secret": "{{BACKOFFICE_API_KEY}}"
+            }
+          },
+          "tag": "bk-crud-client"
+        },
+        {
+          "properties": {
+            "basePath": "/v2/file"
+          },
+          "tag": "bk-file-client"
+        },
+        {
+          "tag": "bk-file-manager"
+        },
+        {
+          "tag": "bk-confirmation-modal"
+        },
+        {
+          "tag": "bk-notifications",
+          "properties": {
+            "rootElementSelectors": "main.micro-lc-layout-content",
+            "successEventMap": {
+              "create-data": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
                 },
-                "update-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item update",
-                    "it": "C'è stato un errore durante l'aggiornamento dell'elemento"
-                  },
-                  "type": "error"
+                "content": {
+                  "en": "Item successfully created",
+                  "it": "L'elemento è stato creato correttamente"
                 },
-                "delete-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item deletion",
-                    "it": "C'è stato un errore durante l'eliminazione dell'elemento"
-                  },
-                  "type": "error"
+                "type": "success"
+              },
+              "update-data": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
                 },
-                "post-http-generic-button": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Requested action failed",
-                    "it": "L'azione richiesta è fallita"
-                  },
-                  "type": "error"
+                "content": {
+                  "en": "Item successfully updated",
+                  "it": "L'elemento è stato aggiornato correttamente"
                 },
-                "get-http-generic-button": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Requested action failed",
-                    "it": "L'azione richiesta è fallita"
-                  },
-                  "type": "error"
+                "type": "success"
+              },
+              "delete-data": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
                 },
-                "download-invoice-button": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Failed to download invoice",
-                    "it": "Download della ricevuta fallito"
-                  },
-                  "type": "error"
+                "content": {
+                  "en": "Item successfully deleted",
+                  "it": "L'elemento è stato eliminato correttamente"
                 },
-                "send-email-button": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Failed to send email",
-                    "it": "Invio della email fallito"
-                  },
-                  "type": "error"
+                "type": "success"
+              },
+              "post-http-generic-button": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
                 },
-                "refund-button": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Failed to refund payment",
-                    "it": "Storno fallito"
-                  },
-                  "type": "error"
+                "content": {
+                  "en": "Requested action executed successfully",
+                  "it": "L'azione richiesta è stata eseguita con successo"
                 },
-                "bk-form-modal-extra-endpoint": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Refund failed",
-                    "it": "Storno fallito"
-                  },
-                  "type": "error"
+                "type": "success"
+              },
+              "get-http-generic-button": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
                 },
-                "error": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Requested action failed",
-                    "it": "L'azione richiesta è fallita"
-                  },
-                  "type": "error"
-                }
+                "content": {
+                  "en": "Requested action executed successfully",
+                  "it": "L'azione richiesta è stata eseguita con successo"
+                },
+                "type": "success"
+              },
+              "download-invoice-button": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Invoice downloaded successfully",
+                  "it": "Ricevuta scaricata con successo"
+                },
+                "type": "success"
+              },
+              "send-email-button": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Email sent successfully",
+                  "it": "Email inviata con successo"
+                },
+                "type": "success"
+              },
+              "refund-button": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Payment refund request accepted, it will be processed",
+                  "it": "La richiesta di storno è stata presa in carico"
+                },
+                "type": "success"
+              },
+              "bk-form-modal-extra-endpoint": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Payment refund request accepted, it will be processed",
+                  "it": "La richiesta di storno è stata presa in carico"
+                },
+                "type": "success"
+              },
+              "success": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Requested action executed successfully",
+                  "it": "L'azione richiesta è stata eseguita con successo"
+                },
+                "type": "success"
+              }
+            },
+            "errorEventMap": {
+              "create-data": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "An error occurred during item creation",
+                  "it": "C'è stato un errore durante la creazione dell'elemento"
+                },
+                "type": "error"
+              },
+              "update-data": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "An error occurred during item update",
+                  "it": "C'è stato un errore durante l'aggiornamento dell'elemento"
+                },
+                "type": "error"
+              },
+              "delete-data": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "An error occurred during item deletion",
+                  "it": "C'è stato un errore durante l'eliminazione dell'elemento"
+                },
+                "type": "error"
+              },
+              "post-http-generic-button": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "Requested action failed",
+                  "it": "L'azione richiesta è fallita"
+                },
+                "type": "error"
+              },
+              "get-http-generic-button": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "Requested action failed",
+                  "it": "L'azione richiesta è fallita"
+                },
+                "type": "error"
+              },
+              "download-invoice-button": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "Failed to download invoice",
+                  "it": "Download della ricevuta fallito"
+                },
+                "type": "error"
+              },
+              "send-email-button": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "Failed to send email",
+                  "it": "Invio della email fallito"
+                },
+                "type": "error"
+              },
+              "refund-button": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "Failed to refund payment",
+                  "it": "Storno fallito"
+                },
+                "type": "error"
+              },
+              "bk-form-modal-extra-endpoint": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "Refund failed",
+                  "it": "Storno fallito"
+                },
+                "type": "error"
+              },
+              "error": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "Requested action failed",
+                  "it": "L'azione richiesta è fallita"
+                },
+                "type": "error"
               }
             }
           }
-        ],
-        "tag": "div",
-        "attributes": {
-          "style": "width: 100%; height: 100%; display: flex; flex-direction: column; position: relative;"
         }
-      },
-      "sources": [
-        "https://cdn.jsdelivr.net/npm/@micro-lc/bk-web-components@latest/dist/bk-web-components.esm.js"
-      ]
-    }
+      ],
+      "tag": "div",
+      "attributes": {
+        "style": "width: 100%; height: 100%; display: flex; flex-direction: column; position: relative;"
+      }
+    },
+    "sources": [
+      "https://cdn.jsdelivr.net/npm/@micro-lc/bk-web-components@latest/dist/bk-web-components.esm.js"
+    ]
   }
+}

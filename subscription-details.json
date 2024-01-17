@@ -1,381 +1,425 @@
 {
-    "$id": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/templates/blank.json#",
-    "$schema": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/engine/schemas/template.schema.json#",
-    "meta": {
-      "label": {
-        "en": "Subscriptions - Details",
-        "it": "Pagamenti Ricorrenti - Dettaglio"
-      },
-      "description": {
-        "en": "View subscription details",
-        "it": "Dettaglio pagamento ricorrenti"
-      }
+  "$id": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/templates/blank.json#",
+  "$schema": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/engine/schemas/template.schema.json#",
+  "meta": {
+    "label": {
+      "en": "Subscriptions - Details",
+      "it": "Pagamenti Ricorrenti - Dettaglio"
     },
-    "template": {
-      "definitions": {
-        "dataSchema": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "label": "ID",
-              "type": "string",
-              "visualizationOptions": {
-                "hidden": true
+    "description": {
+      "en": "View subscription details",
+      "it": "Dettaglio pagamento ricorrenti"
+    }
+  },
+  "template": {
+    "definitions": {
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "label": "ID",
+            "type": "string",
+            "visualizationOptions": {
+              "hidden": true
+            },
+            "formOptions": {
+              "hidden": true
+            },
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "__STATE__": {
+            "label": {
+              "en": "State",
+              "it": "Stato"
+            },
+            "type": "string",
+            "enum": [
+              "PUBLIC",
+              "DRAFT"
+            ],
+            "default": "PUBLIC",
+            "visualizationOptions": {
+              "iconMap": {
+                "PUBLIC": {
+                  "shape": "roundedSquare",
+                  "color": "#52C41A"
+                },
+                "DRAFT": {
+                  "shape": "roundedSquare",
+                  "color": "#CDCDCE"
+                }
               },
-              "formOptions": {
-                "hidden": true
-              },
-              "filtersOptions": {
-                "hidden": true
+              "hidden": true
+            },
+            "formOptions": {
+              "hiddenOnUpdate": true
+            },
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "status": {
+            "label": {
+              "en": "Status",
+              "it": "Stato"
+            },
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
+            },
+            "excludeFromSearch": true,
+            "enum": [
+              "Active",
+              "Not active"
+            ],
+            "visualizationOptions": {
+              "tag": "bk-chip",
+              "properties": {
+                "value": "{{args.[0]}}",
+                "title": "{{args.[0]}}",
+                "valueMap": {
+                  "active": {
+                    "label": {
+                      "en": "active",
+                      "it": "attivo"
+                    },
+                    "color": "#349E47"
+                  },
+                  "Not active": {
+                    "label": {
+                      "en": "not active",
+                      "it": "non attivo"
+                    },
+                    "color": "#F03838"
+                  }
+                }
+              }
+            }
+          },
+          "createdAt": {
+            "label": {
+              "en": "Date",
+              "it": "Data"
+            },
+            "type": "string",
+            "format": "date-time",
+            "dateOptions": {
+              "displayFormat": "YYYY-MM-DD HH:mm:ss"
+            }
+          },
+          "shopSubscriptionId": {
+            "label": {
+              "en": "Subscription ID",
+              "it": "ID Abbonamento"
+            },
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
+            }
+          },
+          "transactions": {
+            "label": {
+              "en": "Transazioni",
+              "it": "Transactions"
+            },
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
+            }
+          },
+          "amount": {
+            "label": {
+              "en": "Amount",
+              "it": "Importo"
+            },
+            "type": "number",
+            "format": "currency",
+            "formOptions": {
+              "template": {
+                "en": "€ {{nFormat '2.,' value}}",
+                "it": "{{nFormat '2.,' value}} €"
               }
             },
-            "__STATE__": {
-              "label": {
-                "en": "State",
-                "it": "Stato"
-              },
-              "type": "string",
-              "enum": [
-                "PUBLIC",
-                "DRAFT"
-              ],
-              "default": "PUBLIC",
-              "visualizationOptions": {
-                "iconMap": {
-                  "PUBLIC": {
-                    "shape": "roundedSquare",
-                    "color": "#52C41A"
-                  },
-                  "DRAFT": {
-                    "shape": "roundedSquare",
-                    "color": "#CDCDCE"
+            "visualizationOptions": {
+              "template": {
+                "en": "€ {{nFormat '2.,' args.[0]}}",
+                "it": "{{nFormat '2.,' args.[0]}} €"
+              }
+            }
+          },
+          "paymentMethod": {
+            "label": {
+              "en": "Method",
+              "it": "Metodo di pagamento"
+            },
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
+            }
+          },
+          "provider": {
+            "label": {
+              "en": "Provider",
+              "it": "Provider"
+            },
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
+            },
+            "visualizationOptions": {
+              "tag": "img",
+              "properties": {
+                "src": {
+                  "template": "{{args.[0]}}",
+                  "configMap": {
+                    "axerve": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d8672ae3ab0fe143e88.png",
+                    "satispay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d1072ae3ab0fe143e84.png",
+                    "braintree": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d3172ae3ab0fe143e86.png",
+                    "soisy": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cd072ae3ab0fe143e80.png",
+                    "stripe": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2c5972ae3ab0fe143e7e.png",
+                    "adyen": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/65816862ef0573692355d6f6.png",
+                    "scalapay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cf372ae3ab0fe143e82.png",
+                    "nexi": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/659bdbdcdd2b811ad6970850.png",
+                    "$default": ""
                   }
                 },
-                "hidden": true
-              },
-              "formOptions": {
-                "hiddenOnUpdate": true
-              },
-              "filtersOptions": {
-                "hidden": true
+                "width": "80"
               }
+            }
+          },
+          "currency": {
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
             },
-            "status": {
-              "label": {
-                "en": "Status",
-                "it": "Stato"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              },
-              "excludeFromSearch": true,
-              "enum": [
-                "Active",
-                "Not active"
-              ],
-              "visualizationOptions": {
-                "tag": "bk-chip",
-                "properties": {
-                  "value": "{{args.[0]}}",
-                  "title": "{{args.[0]}}",
-                  "valueMap": {
-                    "active": {
-                      "label": {
-                        "en": "active",
-                        "it": "attivo"
-                      },
-                      "color": "#349E47"
-                    },
-                    "Not active": {
-                      "label": {
-                        "en": "not active",
-                        "it": "non attivo"
-                      },
-                      "color": "#F03838"
-                    }
-                  }
-                }
-              }
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "intervalCount": {
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
             },
-            "createdAt": {
-              "label": {
-                "en": "Date",
-                "it": "Data"
-              },
-              "type": "string",
-              "format": "date-time",
-              "dateOptions": {
-                "displayFormat": "YYYY-MM-DD"
-              }
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "interval": {
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
             },
-            "shopSubscriptionId": {
-              "label": {
-                "en": "Subscription ID",
-                "it": "ID Abbonamento"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              }
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "nextPaymentDate": {
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
             },
-            "transactions": {
-              "label": {
-                "en": "Transazioni",
-                "it": "Transactions"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              }
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "expirationDate": {
+            "type": "string",
+            "filtersOptions": {
+              "hidden": false
             },
-            "amount": {
-              "label": {
-                "en": "Amount",
-                "it": "Importo"
-              },
-              "type": "number",
-              "format": "currency",
-              "formOptions": {
-                "template": {
-                  "en": "€ {{nFormat '2.,' value}}",
-                  "it": "{{nFormat '2.,' value}} €"
-                }
-              },
-              "visualizationOptions": {
-                "template": {
-                  "en": "€ {{nFormat '2.,' args.[0]}}",
-                  "it": "{{nFormat '2.,' args.[0]}} €"
-                }
-              }
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "sagaId": {
+            "type": "string"
+          },
+          "expireRequested": {
+            "type": "boolean",
+            "filtersOptions": {
+              "hidden": true
             },
-            "paymentMethod": {
-              "label": {
-                "en": "Method",
-                "it": "Metodo di pagamento"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              }
-            },
-            "providerId": {
-              "label": {
-                "en": "Provider",
-                "it": "Provider"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              }
-            },
-            "currency": {
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
-            },
-            "intervalCount": {
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
-            },
-            "interval": {
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
-            },
-            "nextPaymentDate": {
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
-            },
-            "expirationDate": {
-              "type": "string",
-              "filtersOptions": {
-                "hidden": false
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
-            },
-            "sagaId": {
-              "type": "string"
-            },
-            "expireRequested": {
-              "type": "boolean",
-              "filtersOptions": {
-                "hidden": true
-              },
-              "visualizationOptions": {
-                "hidden": true
-              }
+            "visualizationOptions": {
+              "hidden": true
             }
           }
         }
-      },
-      "content": {
-        "content": [
-          {
-            "content": [
-              {
-                "properties": {
-                  "content": "",
-                  "type": "link",
-                  "iconId": "LeftOutlined",
-                  "clickConfig": {
-                    "type": "go-back"
-                  }
-                },
-                "tag": "bk-button"
-              },
-              {
-                "properties": {
-                  "content": {
-                    "en": "Subscription Detail",
-                    "it": "Dettaglio Abbonamento"
-                  }
-                },
-                "tag": "bk-title"
-              },
-              {
-                "tag": "bk-refresh-button",
-                "attributes": {
-                  "style": "margin: 0 1vw 0 0;"
+      }
+    },
+    "content": {
+      "content": [
+        {
+          "content": [
+            {
+              "properties": {
+                "content": "",
+                "type": "link",
+                "iconId": "LeftOutlined",
+                "clickConfig": {
+                  "type": "go-back"
                 }
+              },
+              "tag": "bk-button"
+            },
+            {
+              "properties": {
+                "content": {
+                  "en": "Subscription Detail",
+                  "it": "Dettaglio Abbonamento"
+                }
+              },
+              "tag": "bk-title"
+            },
+            {
+              "tag": "bk-refresh-button",
+              "attributes": {
+                "style": "margin: 0 1vw 0 0;"
               }
-            ],
-            "tag": "header",
-            "attributes": {
-              "style": "display: flex; flex-direction: row; align-items: center; gap: 10px; padding: 10px 20px; background-color: white;"
             }
-          },
-          {
-            "content": [
-              {
-                "tag": "bk-card",
-                "properties": {
-                  "customMessageOnAbsentDatum": "-",
-                  "customMessageOnAbsentLookup": "Not Found",
-                  "cardSchema": {
-                    "header": {
-                      "icon": "InfoCircleOutlined",
-                      "title": {
-                        "it": "Overview",
-                        "en": "Overview"
-                      }
-                    },
-                    "main": {
-                      "dataSchema": {
-                        "type": "object",
-                        "properties": {
-                          "shopSubscriptionId": {
-                            "label": {
-                              "it": "ID abbonamento",
-                              "en": "Subscription ID"
-                            },
-                            "type": "string"
+          ],
+          "tag": "header",
+          "attributes": {
+            "style": "display: flex; flex-direction: row; align-items: center; gap: 10px; padding: 10px 20px; background-color: white;"
+          }
+        },
+        {
+          "content": [
+            {
+              "tag": "bk-card",
+              "properties": {
+                "customMessageOnAbsentDatum": "-",
+                "customMessageOnAbsentLookup": "Not Found",
+                "cardSchema": {
+                  "header": {
+                    "icon": "InfoCircleOutlined",
+                    "title": {
+                      "it": "Overview",
+                      "en": "Overview"
+                    }
+                  },
+                  "main": {
+                    "dataSchema": {
+                      "type": "object",
+                      "properties": {
+                        "shopSubscriptionId": {
+                          "label": {
+                            "it": "ID abbonamento",
+                            "en": "Subscription ID"
                           },
-                          "createdAt": {
-                            "label": {
-                              "it": "Data inizio abbonamento",
-                              "en": "Subscription date"
-                            },
-                            "type": "string",
-                            "format": "date-time",
-                            "dateOptions": {
-                              "displayFormat": "YYYY-MM-DD"
-                            }
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "label": {
+                            "it": "Data inizio abbonamento",
+                            "en": "Subscription date"
                           },
-                          "status": {
-                            "label": {
-                              "it": "Stato attuale",
-                              "en": "Current status"
-                            },
-                            "type": "string"
-                          },
-                          "providerId": {
-                            "label": {
-                              "it": "Provider di pagamento",
-                              "en": "Payment provider"
-                            },
-                            "type": "string"
-                          },
-                          "paymentMethod": {
-                            "label": {
-                              "it": "Metodo di pagamento",
-                              "en": "Payment method"
-                            },
-                            "type": "number"
+                          "type": "string",
+                          "format": "date-time",
+                          "dateOptions": {
+                            "displayFormat": "YYYY-MM-DD HH:mm:ss"
                           }
+                        },
+                        "status": {
+                          "label": {
+                            "it": "Stato attuale",
+                            "en": "Current status"
+                          },
+                          "type": "string"
+                        },
+                        "provider": {
+                          "label": {
+                            "it": "Provider di pagamento",
+                            "en": "Payment provider"
+                          },
+                          "type": "string",
+                          "visualizationOptions": {
+                            "tag": "img",
+                            "properties": {
+                              "src": {
+                                "template": "{{args.[0]}}",
+                                "configMap": {
+                                  "axerve": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d8672ae3ab0fe143e88.png",
+                                  "satispay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d1072ae3ab0fe143e84.png",
+                                  "braintree": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d3172ae3ab0fe143e86.png",
+                                  "soisy": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cd072ae3ab0fe143e80.png",
+                                  "stripe": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2c5972ae3ab0fe143e7e.png",
+                                  "adyen": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/65816862ef0573692355d6f6.png",
+                                  "scalapay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cf372ae3ab0fe143e82.png",
+                                  "nexi": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/659bdbdcdd2b811ad6970850.png",
+                                  "$default": ""
+                                }
+                              },
+                              "width": "80"
+                            }
+                          }
+                        },
+                        "paymentMethod": {
+                          "label": {
+                            "it": "Metodo di pagamento",
+                            "en": "Payment method"
+                          },
+                          "type": "number"
                         }
                       }
-                    },
-                    "footer": {
-                      "buttons": {
-                        "tag": "bk-button",
-                        "loadingOnAction": false,
-                        "content": {
-                          "en": "Cancel Subscription",
-                          "it": "Annulla Abbonamento"
-                        },
-                        "action": {
-                          "type": "event",
-                          "config": {
-                            "events": {
-                              "label": "require-confirm",
-                              "payload": {
-                                "title": {
-                                  "en": "Cancel subscription?",
-                                  "it": "Annullare abbonamento?"
-                                },
-                                "content": {
-                                  "en": "Are you sure you want to cancel this subscription?",
-                                  "it": "Sei sicuro di voler annullare l'abbonamento?"
-                                },
-                                "configCancel": {
-                                  "tag": "bk-button",
-                                  "properties": {
-                                    "content": "No",
-                                    "type": "ghost"
-                                  }
-                                },
-                                "configOk": {
-                                  "tag": "bk-button",
-                                  "properties": {
-                                    "content": {
-                                      "en": "Yes",
-                                      "it": "Sì"
-                                    },
-                                    "action": {
-                                      "type": "http",
+                    }
+                  },
+                  "footer": {
+                    "buttons": {
+                      "tag": "bk-button",
+                      "loadingOnAction": false,
+                      "content": {
+                        "en": "Cancel Subscription",
+                        "it": "Annulla Abbonamento"
+                      },
+                      "action": {
+                        "type": "event",
+                        "config": {
+                          "events": {
+                            "label": "require-confirm",
+                            "payload": {
+                              "title": {
+                                "en": "Cancel subscription?",
+                                "it": "Annullare abbonamento?"
+                              },
+                              "content": {
+                                "en": "Are you sure you want to cancel this subscription?",
+                                "it": "Sei sicuro di voler annullare l'abbonamento?"
+                              },
+                              "configCancel": {
+                                "tag": "bk-button",
+                                "properties": {
+                                  "content": "No",
+                                  "type": "ghost"
+                                }
+                              },
+                              "configOk": {
+                                "tag": "bk-button",
+                                "properties": {
+                                  "content": {
+                                    "en": "Yes",
+                                    "it": "Sì"
+                                  },
+                                  "action": {
+                                    "type": "http",
+                                    "config": {
+                                      "url": "/pgm-bff/expire?sagaId={{data.sagaId}}",
+                                      "method": "DELETE",
                                       "config": {
-                                        "url": "/pgm-bff/expire?sagaId={{data.sagaId}}",
-                                        "method": "DELETE"
-                                      },
-                                      "hooks": {
-                                        "onSuccess": {
-                                          "type": "event",
-                                          "config": {
-                                            "events": {
-                                              "label": "change-query",
-                                              "payload": {}
-                                            }
+                                        "headers": {
+                                          "secret": "{{BACKOFFICE_API_KEY}}"
+                                        }
+                                      }
+                                    },
+                                    "hooks": {
+                                      "onSuccess": {
+                                        "type": "event",
+                                        "config": {
+                                          "events": {
+                                            "label": "change-query",
+                                            "payload": {}
                                           }
                                         }
                                       }
@@ -385,399 +429,395 @@
                               }
                             }
                           }
+                        }
+                      },
+                      "disabled": {
+                        "template": "{{data.expireRequested}}",
+                        "configMap": {
+                          "true": true,
+                          "false": false,
+                          "$default": true
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "attributes": {
+                "style": " padding: 2em 4em 0; flex-grow: 1; position:relative; overflow:hidden; width: 100%"
+              }
+            },
+            {
+              "tag": "bk-card",
+              "properties": {
+                "customMessageOnAbsentDatum": "-",
+                "customMessageOnAbsentLookup": "Not Found",
+                "cardSchema": {
+                  "header": {
+                    "icon": "fas fa-address-book",
+                    "title": {
+                      "it": "Informazioni di ricorrenza",
+                      "en": "Recurrence information"
+                    }
+                  },
+                  "main": {
+                    "dataSchema": {
+                      "type": "object",
+                      "properties": {
+                        "amount": {
+                          "label": {
+                            "it": "Importo",
+                            "en": "Amount"
+                          },
+                          "type": "number"
                         },
-                        "disabled": {
-                          "template": "{{data.expireRequested}}",
-                          "configMap": {
-                            "true": true,
-                            "false": false,
-                            "$default": true
+                        "currency": {
+                          "label": {
+                            "it": "Valuta",
+                            "en": "Currency"
+                          },
+                          "type": "string"
+                        },
+                        "intervalCount": {
+                          "label": {
+                            "it": "Periodo di ricorrenza",
+                            "en": "Recurrence period"
+                          },
+                          "type": "string"
+                        },
+                        "interval": {
+                          "label": {
+                            "it": "Intervallo",
+                            "en": "Interval"
+                          },
+                          "type": "string"
+                        },
+                        "nextPaymentDate": {
+                          "label": {
+                            "it": "Prossimo pagamento",
+                            "en": "Next payment"
+                          },
+                          "type": "string",
+                          "format": "date-time",
+                          "dateOptions": {
+                            "displayFormat": "YYYY-MM-DD HH:mm:ss"
+                          }
+                        },
+                        "expirationDate": {
+                          "label": {
+                            "it": "Scade il",
+                            "en": "Expiration Date"
+                          },
+                          "type": "string",
+                          "format": "date-time",
+                          "dateOptions": {
+                            "displayFormat": "YYYY-MM-DD HH:mm:ss"
                           }
                         }
                       }
                     }
                   }
-                },
-                "attributes": {
-                  "style": " padding: 2em 4em 0; flex-grow: 1; position:relative; overflow:hidden; width: 100%"
                 }
               },
-              {
-                "content": [
-                  {
-                    "tag": "bk-card",
-                    "properties": {
-                      "customMessageOnAbsentDatum": "-",
-                      "customMessageOnAbsentLookup": "Not Found",
-                      "cardSchema": {
-                        "header": {
-                          "icon": "fas fa-address-book",
-                          "title": {
-                            "it": "Informazioni di ricorrenza",
-                            "en": "Recurrence information"
-                          }
-                        },
-                        "main": {
-                          "dataSchema": {
-                            "type": "object",
-                            "properties": {
-                              "amount": {
-                                "label": {
-                                  "it": "Importo",
-                                  "en": "Amount"
-                                },
-                                "type": "number"
-                              },
-                              "currency": {
-                                "label": {
-                                  "it": "Valuta",
-                                  "en": "Currency"
-                                },
-                                "type": "string"
-                              },
-                              "intervalCount": {
-                                "label": {
-                                  "it": "Periodo di ricorrenza",
-                                  "en": "Recurrence period"
-                                },
-                                "type": "string"
-                              },
-                              "interval": {
-                                "label": {
-                                  "it": "Intervallo",
-                                  "en": "Interval"
-                                },
-                                "type": "string"
-                              },
-                              "nextPaymentDate": {
-                                "label": {
-                                  "it": "Prossimo pagamento",
-                                  "en": "Next payment"
-                                },
-                                "type": "string",
-                                "format": "date-time",
-                                "dateOptions": {
-                                  "displayFormat": "YYYY-MM-DD"
-                                }
-                              },
-                              "expirationDate": {
-                                "label": {
-                                  "it": "Scade il",
-                                  "en": "Expiration Date"
-                                },
-                                "type": "string",
-                                "format": "date-time",
-                                "dateOptions": {
-                                  "displayFormat": "YYYY-MM-DD"
-                                }
-                              }
-                            }
-                          }
+              "attributes": {
+                "style": "background-color: #f0f2f5; padding: 0 1em 0 0; width: 100%"
+              }
+            },
+            {
+              "tag": "bk-table",
+              "properties": {
+                "displayedDataPath": "data.[0].transactions",
+                "disableRowClick": true,
+                "disableRowSelection": true,
+                "dataSchema": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "label": {
+                        "en": "Date",
+                        "it": "Data"
+                      },
+                      "format": "date-time",
+                      "dateOptions": {
+                        "displayFormat": "YYYY-MM-DD HH:mm"
+                      },
+                      "visualizationOptions": {
+                        "sortable": false
+                      }
+                    },
+                    "shopTransactionId": {
+                      "type": "string",
+                      "label": {
+                        "en": "Transaction Id",
+                        "it": "Id transazione"
+                      },
+                      "visualizationOptions": {
+                        "sortable": false
+                      }
+                    },
+                    "amount": {
+                      "type": "number",
+                      "format": "currency",
+                      "label": {
+                        "en": "Amount",
+                        "it": "Importo"
+                      },
+                      "visualizationOptions": {
+                        "sortable": true,
+                        "template": {
+                          "en": "€ {{nFormat '2.,' args.[0]}}",
+                          "it": "{{nFormat '2.,' args.[0]}} €"
                         }
                       }
                     },
-                    "attributes": {
-                      "style": "background-color: #f0f2f5; padding: 0 1em 0 0; width: 100%"
+                    "status": {
+                      "type": "string",
+                      "label": {
+                        "en": "Status",
+                        "it": "Stato"
+                      },
+                      "visualizationOptions": {
+                        "sortable": false
+                      }
+                    },
+                    "_id": {
+                      "type": "string",
+                      "visualizationOptions": {
+                        "hidden": true
+                      }
+                    }
+                  }
+                },
+                "customActions": [
+                  {
+                    "tag": "bk-button",
+                    "properties": {
+                      "content": "",
+                      "title": "Go to Detail",
+                      "iconId": "fas fa-arrow-right",
+                      "iconPlacement": "right",
+                      "clickConfig": {
+                        "type": "push",
+                        "actionConfig": {
+                          "url": "./transaction-detail/{{args.[1]._id}}"
+                        }
+                      }
                     }
                   }
                 ],
-                "tag": "main",
-                "attributes": {
-                  "style": "display: flex; flex-direction: row; align-items: start; background-color: #f0f2f5;  flex-grow: 1; position:relative; overflow:hidden;"
-                }
+                "initialSortDirection": "descend",
+                "initialSortProperty": "amount"
               },
-              {
-                "tag": "bk-table",
-                "properties": {
-                  "displayedDataPath": "data.[0].transactions",
-                  "disableRowClick": true,
-                  "disableRowSelection": true,
-                  "dataSchema": {
-                    "type": "object",
-                    "properties": {
-                      "date": {
-                        "type": "string",
-                        "label": {
-                          "en": "Date",
-                          "it": "Data"
-                        },
-                        "format": "date-time",
-                        "dateOptions": {
-                          "displayFormat": "YYYY-MM-DD HH:mm"
-                        },
-                        "visualizationOptions": {
-                          "sortable": false
-                        }
-                      },
-                      "shopTransactionId": {
-                        "type": "string",
-                        "label": {
-                          "en": "Transaction Id",
-                          "it": "Id transazione"
-                        },
-                        "visualizationOptions": {
-                          "sortable": false
-                        }
-                      },
-                      "amount": {
-                        "type": "number",
-                        "format": "currency",
-                        "label": {
-                          "en": "Amount",
-                          "it": "Importo"
-                        },
-                        "visualizationOptions": {
-                          "sortable": true,
-                          "template": {
-                            "en": "€ {{nFormat '2.,' args.[0]}}",
-                            "it": "{{nFormat '2.,' args.[0]}} €"
-                          }
-                        }
-                      },
-                      "status": {
-                        "type": "string",
-                        "label": {
-                          "en": "Status",
-                          "it": "Stato"
-                        },
-                        "visualizationOptions": {
-                          "sortable": false
-                        }
-                      },
-                      "_id": {
-                        "type": "string",
-                        "visualizationOptions": {
-                          "hidden": true
-                        }
-                      }
-                    }
-                  },
-                  "customActions": [
-                    {
-                      "tag": "bk-button",
-                      "properties": {
-                        "content": "",
-                        "title": "Go to Detail",
-                        "iconId": "fas fa-arrow-right",
-                        "iconPlacement": "right",
-                        "clickConfig": {
-                          "type": "push",
-                          "actionConfig": {
-                            "url": "./transaction-detail/{{args.[1]._id}}"
-                          }
-                        }
-                      }
-                    }
-                  ],
-                  "initialSortDirection": "descend",
-                  "initialSortProperty": "amount"
-                },
-                "attributes": {
-                  "style": "background-color: #f0f2f5; padding: 0em 4em 0; flex-grow: 1; position:relative; overflow:hidden;"
-                }
+              "attributes": {
+                "style": "background-color: #f0f2f5; padding: 0em 4em 0; flex-grow: 1; position:relative; overflow:hidden;"
               }
-            ],
-            "tag": "main",
-            "attributes": {
-              "style": "flex-grow: 1; background-color: #f0f2f5; padding: 20px; overflow-y: auto;"
+            }
+          ],
+          "tag": "main",
+          "attributes": {
+            "style": "flex-grow: 1; background-color: #f0f2f5; padding: 20px; overflow-y: auto;"
+          }
+        },
+        {
+          "tag": "bk-state-adapter",
+          "attributes": {
+            "style": "display: none;"
+          }
+        },
+        {
+          "tag": "bk-url-parameters",
+          "properties": {
+            "urlMask": "/backoffice/subscription-details/:_id"
+          }
+        },
+        {
+          "properties": {
+            "basePath": "/subscriptions-view",
+            "dataSchema": {
+              "$ref": "#/definitions/dataSchema"
+            },
+            "headers": {
+              "secret": "{{BACKOFFICE_API_KEY}}"
             }
           },
-          {
-            "tag": "bk-state-adapter",
-            "attributes": {
-              "style": "display: none;"
-            }
+          "tag": "bk-crud-client"
+        },
+        {
+          "properties": {
+            "basePath": "/v2/file"
           },
-          {
-            "tag": "bk-url-parameters",
-            "properties": {
-              "urlMask": "/backoffice/subscription-details/:_id"
-            }
+          "tag": "bk-file-client"
+        },
+        {
+          "tag": "bk-file-manager"
+        },
+        {
+          "tag": "bk-confirmation-modal"
+        },
+        {
+          "properties": {
+            "requireConfirm": {
+              "onClose": true,
+              "onSave": true
+            },
+            "dataSchema": {
+              "$ref": "#/definitions/dataSchema"
+            },
+            "width": "70vw"
           },
-          {
-            "properties": {
-              "basePath": "/subscriptions-view",
-              "dataSchema": {
-                "$ref": "#/definitions/dataSchema"
+          "tag": "bk-form-modal"
+        },
+        {
+          "tag": "bk-notifications",
+          "properties": {
+            "rootElementSelectors": "main.micro-lc-layout-content",
+            "successEventMap": {
+              "create-data": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Item successfully created",
+                  "it": "L'elemento è stato creato correttamente"
+                },
+                "type": "success"
+              },
+              "update-data": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Item successfully updated",
+                  "it": "L'elemento è stato aggiornato correttamente"
+                },
+                "type": "success"
+              },
+              "delete-data": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Item successfully deleted",
+                  "it": "L'elemento è stato eliminato correttamente"
+                },
+                "type": "success"
+              },
+              "post-http-generic-button": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Requested action executed successfully",
+                  "it": "L'azione richiesta è stata eseguita con successo"
+                },
+                "type": "success"
+              },
+              "get-http-generic-button": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Requested action executed successfully",
+                  "it": "L'azione richiesta è stata eseguita con successo"
+                },
+                "type": "success"
+              },
+              "success": {
+                "title": {
+                  "en": "Success",
+                  "it": "Successo"
+                },
+                "content": {
+                  "en": "Requested action executed successfully",
+                  "it": "L'azione richiesta è stata eseguita con successo"
+                },
+                "type": "success"
               }
             },
-            "tag": "bk-crud-client"
-          },
-          {
-            "properties": {
-              "basePath": "/v2/file"
-            },
-            "tag": "bk-file-client"
-          },
-          {
-            "tag": "bk-file-manager"
-          },
-          {
-            "tag": "bk-confirmation-modal"
-          },
-          {
-            "properties": {
-              "requireConfirm": {
-                "onClose": true,
-                "onSave": true
+            "errorEventMap": {
+              "create-data": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "An error occurred during item creation",
+                  "it": "C'è stato un errore durante la creazione dell'elemento"
+                },
+                "type": "error"
               },
-              "dataSchema": {
-                "$ref": "#/definitions/dataSchema"
+              "update-data": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
+                },
+                "content": {
+                  "en": "An error occurred during item update",
+                  "it": "C'è stato un errore durante l'aggiornamento dell'elemento"
+                },
+                "type": "error"
               },
-              "width": "70vw"
-            },
-            "tag": "bk-form-modal"
-          },
-          {
-            "tag": "bk-notifications",
-            "properties": {
-              "rootElementSelectors": "main.micro-lc-layout-content",
-              "successEventMap": {
-                "create-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Item successfully created",
-                    "it": "L'elemento è stato creato correttamente"
-                  },
-                  "type": "success"
+              "delete-data": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
                 },
-                "update-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Item successfully updated",
-                    "it": "L'elemento è stato aggiornato correttamente"
-                  },
-                  "type": "success"
+                "content": {
+                  "en": "An error occurred during item deletion",
+                  "it": "C'è stato un errore durante l'eliminazione dell'elemento"
                 },
-                "delete-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Item successfully deleted",
-                    "it": "L'elemento è stato eliminato correttamente"
-                  },
-                  "type": "success"
-                },
-                "post-http-generic-button": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Requested action executed successfully",
-                    "it": "L'azione richiesta è stata eseguita con successo"
-                  },
-                  "type": "success"
-                },
-                "get-http-generic-button": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Requested action executed successfully",
-                    "it": "L'azione richiesta è stata eseguita con successo"
-                  },
-                  "type": "success"
-                },
-                "success": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Requested action executed successfully",
-                    "it": "L'azione richiesta è stata eseguita con successo"
-                  },
-                  "type": "success"
-                }
+                "type": "error"
               },
-              "errorEventMap": {
-                "create-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item creation",
-                    "it": "C'è stato un errore durante la creazione dell'elemento"
-                  },
-                  "type": "error"
+              "post-http-generic-button": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
                 },
-                "update-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item update",
-                    "it": "C'è stato un errore durante l'aggiornamento dell'elemento"
-                  },
-                  "type": "error"
+                "content": {
+                  "en": "Requested action failed",
+                  "it": "L'azione richiesta è fallita"
                 },
-                "delete-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item deletion",
-                    "it": "C'è stato un errore durante l'eliminazione dell'elemento"
-                  },
-                  "type": "error"
+                "type": "error"
+              },
+              "get-http-generic-button": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
                 },
-                "post-http-generic-button": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Requested action failed",
-                    "it": "L'azione richiesta è fallita"
-                  },
-                  "type": "error"
+                "content": {
+                  "en": "Requested action failed",
+                  "it": "L'azione richiesta è fallita"
                 },
-                "get-http-generic-button": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Requested action failed",
-                    "it": "L'azione richiesta è fallita"
-                  },
-                  "type": "error"
+                "type": "error"
+              },
+              "error": {
+                "title": {
+                  "en": "Error",
+                  "it": "Errore"
                 },
-                "error": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Requested action failed",
-                    "it": "L'azione richiesta è fallita"
-                  },
-                  "type": "error"
-                }
+                "content": {
+                  "en": "Requested action failed",
+                  "it": "L'azione richiesta è fallita"
+                },
+                "type": "error"
               }
             }
           }
-        ],
-        "tag": "div",
-        "attributes": {
-          "style": "width: 100%; height: 100%; display: flex; flex-direction: column; position: relative;"
         }
-      },
-      "sources": [
-        "https://cdn.jsdelivr.net/npm/@micro-lc/bk-web-components@latest/dist/bk-web-components.esm.js"
-      ]
-    }
+      ],
+      "tag": "div",
+      "attributes": {
+        "style": "width: 100%; height: 100%; display: flex; flex-direction: column; position: relative;"
+      }
+    },
+    "sources": [
+      "https://cdn.jsdelivr.net/npm/@micro-lc/bk-web-components@latest/dist/bk-web-components.esm.js"
+    ]
   }
+}
