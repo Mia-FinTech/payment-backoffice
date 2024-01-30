@@ -174,14 +174,15 @@
                 "src": {
                   "template": "{{args.[0]}}",
                   "configMap": {
-                    "axerve": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d8672ae3ab0fe143e88.png",
-                    "satispay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d1072ae3ab0fe143e84.png",
-                    "braintree": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d3172ae3ab0fe143e86.png",
-                    "soisy": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cd072ae3ab0fe143e80.png",
-                    "stripe": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2c5972ae3ab0fe143e7e.png",
-                    "adyen": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/65816862ef0573692355d6f6.png",
-                    "scalapay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cf372ae3ab0fe143e82.png",
-                    "nexi": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/659bdbdcdd2b811ad6970850.png",
+                    "axerve": "/backoffice/assets/axerve.svg",
+                    "satispay": "/backoffice/assets/satispay.svg",
+                    "braintree": "/backoffice/assets/braintree.svg",
+                    "soisy": "/backoffice/assets/soisy.svg",
+                    "stripe": "/backoffice/assets/stripe.svg",
+                    "adyen": "/backoffice/assets/adyen.svg",
+                    "scalapay": "/backoffice/assets/scalapay.svg",
+                    "nexi": "/backoffice/assets/nexi.svg",
+                    "flowpay": "/backoffice/assets/flowpay.svg",
                     "$default": ""
                   }
                 },
@@ -341,14 +342,15 @@
                               "src": {
                                 "template": "{{args.[0]}}",
                                 "configMap": {
-                                  "axerve": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d8672ae3ab0fe143e88.png",
-                                  "satispay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d1072ae3ab0fe143e84.png",
-                                  "braintree": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d3172ae3ab0fe143e86.png",
-                                  "soisy": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cd072ae3ab0fe143e80.png",
-                                  "stripe": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2c5972ae3ab0fe143e7e.png",
-                                  "adyen": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/65816862ef0573692355d6f6.png",
-                                  "scalapay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cf372ae3ab0fe143e82.png",
-                                  "nexi": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/659bdbdcdd2b811ad6970850.png",
+                                  "axerve": "/backoffice/assets/axerve.svg",
+                                  "satispay": "/backoffice/assets/satispay.svg",
+                                  "braintree": "/backoffice/assets/braintree.svg",
+                                  "soisy": "/backoffice/assets/soisy.svg",
+                                  "stripe": "/backoffice/assets/stripe.svg",
+                                  "adyen": "/backoffice/assets/adyen.svg",
+                                  "scalapay": "/backoffice/assets/scalapay.svg",
+                                  "nexi": "/backoffice/assets/nexi.svg",
+                                  "flowpay": "/backoffice/assets/flowpay.svg",
                                   "$default": ""
                                 }
                               },
@@ -405,7 +407,7 @@
                                   "action": {
                                     "type": "http",
                                     "config": {
-                                      "url": "/pgm-bff/expire?sagaId={{data.sagaId}}",
+                                      "url": "/expire?sagaId={{data.sagaId}}",
                                       "method": "DELETE",
                                       "config": {
                                         "headers": {

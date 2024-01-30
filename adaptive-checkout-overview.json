@@ -269,7 +269,7 @@
                                     "type": "event",
                                     "config": {
                                       "events": {
-                                        "label": "delete-data",
+                                        "label": "http-delete",
                                         "payload": "{{rawObject args.[1]}}"
                                       }
                                     }
@@ -435,7 +435,55 @@
         {
           "content": [
             {
-              "tag": "bk-bulk-delete"
+              "tag": "bk-button",
+              "properties": {
+                "content": {
+                  "en": "Delete",
+                  "it": "Elimina"
+                },
+                "disableOnAction": true,
+                "bulkButton": true,
+                "action": {
+                  "type": "event",
+                  "config": {
+                    "events": {
+                      "label": "require-confirm",
+                      "payload": {
+                        "title": {
+                          "en": "Warning",
+                          "it": "Attenzione"
+                        },
+                        "content": {
+                          "en": "Do you want to delete the selected elements?",
+                          "it": "Vuoi eliminare gli elementi selezionati?"
+                        },
+                        "configOk": {
+                          "tag": "bk-button",
+                          "properties": {
+                            "content": {
+                              "en": "Confirm",
+                              "it": "Conferma"
+                            },
+                            "action": {
+                              "type": "event",
+                              "config": {
+                                "events": {
+                                  "label": "http-delete",
+                                  "payload": "{{rawObject selectedData}}"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "iconId": "DeleteOutlined",
+                "iconPlacement": "right",
+                "type": "ghost",
+                "danger": true
+              }
             },
             {
               "tag": "div",

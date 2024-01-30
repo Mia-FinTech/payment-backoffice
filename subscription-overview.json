@@ -164,14 +164,15 @@
                 "src": {
                   "template": "{{args.[0]}}",
                   "configMap": {
-                    "axerve": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d8672ae3ab0fe143e88.png",
-                    "satispay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d1072ae3ab0fe143e84.png",
-                    "braintree": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2d3172ae3ab0fe143e86.png",
-                    "soisy": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cd072ae3ab0fe143e80.png",
-                    "stripe": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2c5972ae3ab0fe143e7e.png",
-                    "adyen": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/65816862ef0573692355d6f6.png",
-                    "scalapay": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/655f2cf372ae3ab0fe143e82.png",
-                    "nexi": "https://payment-integration-hub.sandbox.azure.mia-fintech.io/logo/download/659bdbdcdd2b811ad6970850.png",
+                    "axerve": "/backoffice/assets/axerve.svg",
+                    "satispay": "/backoffice/assets/satispay.svg",
+                    "braintree": "/backoffice/assets/braintree.svg",
+                    "soisy": "/backoffice/assets/soisy.svg",
+                    "stripe": "/backoffice/assets/stripe.svg",
+                    "adyen": "/backoffice/assets/adyen.svg",
+                    "scalapay": "/backoffice/assets/scalapay.svg",
+                    "nexi": "/backoffice/assets/nexi.svg",
+                    "flowpay": "/backoffice/assets/flowpay.svg",
                     "$default": ""
                   }
                 },
@@ -460,94 +461,9 @@
           "tag": "bk-export-client",
           "properties": {
             "basePath": "/export",
-            "exportInternalUrl": "http://crud-service/fm-transactions-view/export",
+            "exportInternalUrl": "http://crud-service/subscriptions-view/export",
             "dataSchema": {
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "label": "ID",
-                  "type": "string",
-                  "visualizationOptions": {
-                    "hidden": true
-                  },
-                  "formOptions": {
-                    "hidden": true
-                  },
-                  "filtersOptions": {
-                    "hidden": true
-                  }
-                },
-                "currentStatus": {
-                  "label": {
-                    "en": "Status",
-                    "it": "Stato"
-                  },
-                  "type": "string"
-                },
-                "date": {
-                  "label": {
-                    "en": "Date",
-                    "it": "Data"
-                  },
-                  "type": "string"
-                },
-                "shopTransactionId": {
-                  "label": {
-                    "en": "Transaction ID",
-                    "it": "ID Transazione"
-                  },
-                  "type": "string"
-                },
-                "amount": {
-                  "label": {
-                    "en": "Amount",
-                    "it": "Importo"
-                  },
-                  "type": "number"
-                },
-                "totalRefundedAmount": {
-                  "label": {
-                    "en": "Refunded amount",
-                    "it": "Importo stornato"
-                  },
-                  "type": "number"
-                },
-                "paymentMethod": {
-                  "label": {
-                    "en": "Method",
-                    "it": "Metodo di pagamento"
-                  },
-                  "type": "string"
-                },
-                "provider": {
-                  "label": {
-                    "en": "Provider",
-                    "it": "Provider"
-                  },
-                  "type": "string"
-                },
-                "channel": {
-                  "label": {
-                    "en": "Channel",
-                    "it": "Canale"
-                  },
-                  "type": "string"
-                },
-                "buyerName": {
-                  "label": {
-                    "en": "Name",
-                    "it": "Nome"
-                  },
-                  "type": "string"
-                },
-                "buyerEmail": {
-                  "label": {
-                    "en": "Email",
-                    "it": "Email"
-                  },
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/dataSchema"
             },
             "headers": {
               "secret": "{{BACKOFFICE_API_KEY}}"
