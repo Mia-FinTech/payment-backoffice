@@ -1,353 +1,276 @@
 {
-    "$id": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/templates/blank.json#",
-    "$schema": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/engine/schemas/template.schema.json#",
-    "meta": {
-      "label": {
-        "en": "Adaptive Checkout - Overview",
-        "it": "Adaptive Checkout - Overview"
-      },
-      "description": {
-        "en": "Monitors all rules related to adaptive checkout logic",
-        "it": "Monitora tutte le regole relative alla scelta dinamica del metodo di pagamento"
-      }
+  "$id": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/templates/blank.json#",
+  "$schema": "https://raw.githubusercontent.com/micro-lc/back-kit/main/packages/engine/schemas/template.schema.json#",
+  "meta": {
+    "label": {
+      "en": "Adaptive Checkout - Overview",
+      "it": "Adaptive Checkout - Overview"
     },
-    "template": {
-      "definitions": {
-        "dataSchema": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string",
-              "visualizationOptions": {
-                "hidden": true
-              },
-              "formOptions": {
-                "hidden": true
-              },
-              "filtersOptions": {
-                "hidden": true
-              }
+    "description": {
+      "en": "Monitors all rules related to adaptive checkout logic",
+      "it": "Monitora tutte le regole relative alla scelta dinamica del metodo di pagamento"
+    }
+  },
+  "template": {
+    "definitions": {
+      "dataSchema": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "label": "ID",
+            "visualizationOptions": {
+              "hidden": true
             },
-            "__STATE__": {
-              "label": {
-                "en": "State",
-                "it": "Stato"
-              },
-              "type": "string",
-              "enum": [
-                "PUBLIC",
-                "DRAFT"
-              ],
-              "default": "PUBLIC",
-              "visualizationOptions": {
-                "iconMap": {
-                  "PUBLIC": {
-                    "shape": "roundedSquare",
-                    "color": "#52C41A"
-                  },
-                  "DRAFT": {
-                    "shape": "roundedSquare",
-                    "color": "#CDCDCE"
-                  }
-                },
-                "hidden": true
-              },
-              "formOptions": {
-                "hiddenOnUpdate": true
-              },
-              "filtersOptions": {
-                "hidden": true
-              }
+            "formOptions": {
+              "hidden": true
             },
-            "priority": {
-              "label": {
-                "en": "Priority",
-                "it": "Priorità"
-              },
-              "type": "integer",
-              "filtersOptions": {
-                "hidden": true
-              },
-              "minimum": 0
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "__STATE__": {
+            "type": "string",
+            "label": "State",
+            "enum": [
+              "PUBLIC",
+              "DRAFT",
+              "TRASH",
+              "DELETED"
+            ],
+            "visualizationOptions": {
+              "hidden": true
             },
-            "ruleId": {
-              "label": {
-                "en": "Rule ID",
-                "it": "ID Regola"
-              },
-              "type": "string",
-              "filtersOptions": {
-                "hidden": true
-              }
+            "formOptions": {
+              "hidden": true
             },
-            "enabledMethods": {
-              "label": {
-                "en": "Payment methods enabled",
-                "it": "Metodi di pagamento abilitati"
-              },
-              "type": "array",
-              "visualizationOptions": {
-                "template": {
-                  "en": "{{#with this}} {{#each this}} {{#unless @last}} {{this.paymentMethod}}, {{else}} {{this.paymentMethod}} {{/unless}} {{/each}} {{else}} No payment method enabled {{/with}}",
-                  "it": "{{#with this}} {{#each this}} {{#unless @last}} {{this.paymentMethod}}, {{else}} {{this.paymentMethod}} {{/unless}} {{/each}} {{else}} Nessun metodo di pagamento abilitato {{/with}}"
-                }
-              },
-              "dataSchema": {
-                "type": "object",
-                "properties": {
-                  "paymentMethod": {
-                    "type": "string",
-                    "enum": [
-                      "Apple Pay",
-                      "Credit Card",
-                      "Google Pay",
-                      "PayPal",
-                      "SafeCharge",
-                      "Satispay",
-                      "Scalapay",
-                      "Soisy",
-                      "Stripe"
-                    ],
-                    "label": {
-                      "en": "Payment method",
-                      "it": "Metodo di pagamento"
-                    }
-                  },
-                  "provider": {
-                    "type": "string",
-                    "enum": [
-                      "Adyen",
-                      "Axerve",
-                      "Braintree",
-                      "SafeCharge",
-                      "Satispay",
-                      "Scalapay",
-                      "Soisy",
-                      "Stripe",
-                      "Unicredit"
-                    ],
-                    "label": {
-                      "en": "Provider",
-                      "it": "Provider"
-                    }
-                  }
-                }
-              }
+            "filtersOptions": {
+              "hidden": true
+            }
+          },
+          "priority": {
+            "type": "integer",
+            "label": "Priority"
+          },
+          "ruleId": {
+            "type": "string",
+            "label": "Id"
+          },
+          "type": {
+            "type": "string",
+            "label": "Type",
+            "default": "paymentMethods",
+            "visualizationOptions": {
+              "hidden": true
             },
-            "amount": {
-              "label": {
-                "en": "Amount",
-                "it": "Importo"
-              },
+            "formOptions": {
+              "hidden": true
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
               "type": "object",
-              "visualizationOptions": {
-                "template": {
-                  "en": "{{#with this}} € {{nFormat '2.,' min}} ≤ Amount ≤ € {{nFormat '2.,' max}} {{else}} No rule {{/with}}",
-                  "it": "{{#with this}} {{nFormat '2,.' min}} € ≤ Importo ≤ {{nFormat '2,.' max}} € {{else}} Nessuna regola {{/with}}"
-                }
-              },
-              "dataSchema": {
-                "type": "object",
-                "properties": {
-                  "min": {
-                    "label": {
-                      "en": "Min",
-                      "it": "Min"
-                    },
-                    "type": "number",
-                    "minimum": 0
-                  },
-                  "max": {
-                    "label": {
-                      "en": "Max",
-                      "it": "Max"
-                    },
-                    "type": "number",
-                    "minimum": 0
-                  }
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "operator": {
+                  "type": "string",
+                  "enum": [
+                    "equal",
+                    "not_equal",
+                    "in",
+                    "not_in",
+                    "greater_than",
+                    "greater_or_equal_than",
+                    "less_than",
+                    "less_or_equal_than"
+                  ]
+                },
+                "value": {
+                  "type": "string"
                 }
               }
             },
-            "matchInValues": {
-              "label": {
-                "en": "Custom rules",
-                "it": "Regole personalizzate"
-              },
-              "type": "array",
-              "dataSchema": {
-                "type": "object",
-                "properties": {
-                  "key": {
-                    "label": {
-                      "en": "Entity",
-                      "it": "Entità"
-                    },
-                    "type": "string",
-                    "enum": [
-                      "Product Category",
-                      "Channel",
-                      "User Type"
-                    ]
-                  },
-                  "values": {
-                    "label": {
-                      "en": "Values",
-                      "it": "Valori"
-                    },
-                    "type": "string",
-                    "formOptions": {
-                      "placeholder": "Multiple values separated by comma: \"x,y,z\""
-                    }
-                  }
+            "visualizationOptions": {
+              "hidden": true
+            }
+          },
+          "response": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "label": "Provider",
+                  "enum": [
+                    "adyen",
+                    "axerve",
+                    "braintree",
+                    "flowpay",
+                    "nexi",
+                    "satispay",
+                    "scalapay",
+                    "stripe"
+                  ]
+                },
+                "paymentMethod": {
+                  "type": "string",
+                  "label": "Payment Method",
+                  "enum": [
+                    "applepay",
+                    "credit-cards",
+                    "googlepay",
+                    "pay-pal",
+                    "satispay",
+                    "scalapay",
+                    "wire-transfer"
+                  ]
                 }
               }
+            },
+            "visualizationOptions": {
+              "hidden": true
             }
           }
         }
-      },
-      "content": {
-        "content": [
-          {
-            "content": [
-              {
-                "tag": "div",
-                "content": [
-                  {
-                    "properties": {
-                      "content": "Adaptive Checkout"
+      }
+    },
+    "content": {
+      "content": [
+        {
+          "content": [
+            {
+              "tag": "div",
+              "content": [
+                {
+                  "properties": {
+                    "content": "Rules"
+                  },
+                  "tag": "bk-title"
+                },
+                {
+                  "tag": "bk-refresh-button",
+                  "attributes": {
+                    "style": "margin-left: 14px; align-self: end;"
+                  }
+                },
+                {
+                  "tag": "div",
+                  "attributes": {
+                    "style": "flex-grow: 1;"
+                  }
+                },
+                {
+                  "properties": {
+                    "placeholder": "Search..."
+                  },
+                  "tag": "bk-search-bar"
+                },
+                {
+                  "tag": "bk-button",
+                  "attributes": {
+                    "style": "margin: 0 1vw 0 0;"
+                  },
+                  "properties": {
+                    "content": {
+                      "en": "New Rule",
+                      "it": "Regola"
                     },
-                    "tag": "bk-title"
-                  },
-                  {
-                    "tag": "bk-refresh-button",
-                    "attributes": {
-                      "style": "margin-left: 14px; align-self: end;"
+                    "iconId": "fas fa-plus",
+                    "action": {
+                      "type": "event",
+                      "config": {
+                        "events": {
+                          "label": "add-new",
+                          "payload": {}
+                        }
+                      }
                     }
-                  },
-                  {
-                    "tag": "div",
-                    "attributes": {
-                      "style": "flex-grow: 1;"
-                    }
-                  },
-                  {
-                    "properties": {
-                      "placeholder": "Search..."
+                  }
+                },
+                {
+                  "properties": {
+                    "content": "",
+                    "clickConfig": {
+                      "type": "event",
+                      "actionConfig": {
+                        "label": "filter",
+                        "payload": {}
+                      }
                     },
-                    "tag": "bk-search-bar"
+                    "type": "outlined",
+                    "iconId": "FunnelPlotOutlined"
                   },
+                  "tag": "bk-button"
+                }
+              ],
+              "attributes": {
+                "style": "display: flex; flex-direction: row; gap: 10px; margin: 0 0 10px 0; padding: 0 20px;"
+              }
+            },
+            {
+              "tag": "div",
+              "attributes": {
+                "style": "width: 100%; display: flex; justify-content: space-between;"
+              },
+              "content": [
+                {
+                  "attributes": {
+                    "style": "margin-right: 4px"
+                  },
+                  "properties": {
+                    "dataSchema": {
+                      "$ref": "#/definitions/dataSchema"
+                    },
+                    "filters": []
+                  },
+                  "tag": "bk-filters-manager"
+                }
+              ]
+            }
+          ],
+          "tag": "header",
+          "attributes": {
+            "style": "display: flex; flex-direction: column; padding-top: 10px; background-color: white;"
+          }
+        },
+        {
+          "content": [
+            {
+              "properties": {
+                "dataSchema": {
+                  "$ref": "#/definitions/dataSchema"
+                },
+                "maxLines": 10,
+                "disableRowClick": true,
+                "customActions": [
                   {
                     "tag": "bk-button",
-                    "attributes": {
-                      "style": "margin: 0 1vw 0 0;"
-                    },
                     "properties": {
-                      "content": {
-                        "en": "New Rule",
-                        "it": "Regola"
-                      },
-                      "iconId": "fas fa-plus",
+                      "iconId": "DeleteOutlined",
+                      "content": "",
+                      "type": "ghost",
                       "action": {
                         "type": "event",
                         "config": {
                           "events": {
-                            "label": "add-new-external",
-                            "payload": {}
-                          }
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "content": "",
-                      "clickConfig": {
-                        "type": "event",
-                        "actionConfig": {
-                          "label": "filter",
-                          "payload": {}
-                        }
-                      },
-                      "type": "outlined",
-                      "iconId": "FunnelPlotOutlined"
-                    },
-                    "tag": "bk-button"
-                  }
-                ],
-                "attributes": {
-                  "style": "display: flex; flex-direction: row; gap: 10px; margin: 0 0 10px 0; padding: 0 20px;"
-                }
-              },
-              {
-                "tag": "div",
-                "attributes": {
-                  "style": "width: 100%; display: flex; justify-content: space-between;"
-                },
-                "content": [
-                  {
-                    "attributes": {
-                      "style": "margin-right: 4px"
-                    },
-                    "properties": {
-                      "dataSchema": {
-                        "$ref": "#/definitions/dataSchema"
-                      },
-                      "filters": []
-                    },
-                    "tag": "bk-filters-manager"
-                  }
-                ]
-              }
-            ],
-            "tag": "header",
-            "attributes": {
-              "style": "display: flex; flex-direction: column; padding-top: 10px; background-color: white;"
-            }
-          },
-          {
-            "content": [
-              {
-                "properties": {
-                  "dataSchema": {
-                    "$ref": "#/definitions/dataSchema"
-                  },
-                  "maxLines": 10,
-                  "customActions": [
-                    {
-                      "tag": "bk-button",
-                      "properties": {
-                        "content": "",
-                        "title": "Delete Data",
-                        "type": "secondary",
-                        "iconId": "fas fa-trash",
-                        "action": {
-                          "type": "event",
-                          "config": {
-                            "events": {
-                              "label": "require-confirm",
-                              "payload": {
-                                "configOk": {
-                                  "tag": "bk-button",
-                                  "properties": {
-                                    "content": "Delete Data",
-                                    "action": {
-                                      "type": "http",
-                                      "config": {
-                                        "url": "/pgm-bff/adaptive-checkout/rule-details/delete/{{args.[1]._id}}",
-                                        "method": "DELETE",
-                                        "payload": {},
-                                        "triggeredBy": "delete-http-crud"
-                                      },
-                                      "hooks": {
-                                        "onSuccess": {
-                                          "type": "event",
-                                          "config": {
-                                            "events": {
-                                              "label": "change-query",
-                                              "payload": {}
-                                            }
-                                          }
-                                        }
+                            "label": "require-confirm",
+                            "payload": {
+                              "content": {
+                                "en": "Do you want to confirm this action?",
+                                "it": "Vuoi confermare questa azione?"
+                              },
+                              "configOk": {
+                                "properties": {
+                                  "action": {
+                                    "type": "event",
+                                    "config": {
+                                      "events": {
+                                        "label": "http-delete",
+                                        "payload": "{{rawObject args.[1]}}"
                                       }
                                     }
                                   }
@@ -357,512 +280,255 @@
                           }
                         }
                       }
-                    },
-                    {
-                      "tag": "bk-button",
-                      "properties": {
-                        "content": "",
-                        "title": "Go to Detail",
-                        "iconId": "fas fa-arrow-right",
-                        "iconPlacement": "right",
-                        "action": {
-                          "type": "push",
-                          "config": {
-                            "url": "./adaptive-checkout-detail/{{args.[1]._id}}"
-                          }
-                        }
-                      }
                     }
-                  ],
-                  "initialSortDirection": "ascend",
-                  "initialSortProperty": "priority",
-                  "disableRowClick": true,
-                  "disableRowSelectionChange": false,
-                  "allowNavigation": false
-                },
-                "tag": "bk-table"
-              },
-              {
-                "tag": "bk-form-modal",
-                "properties": {
-                  "dataSchema": {
-                    "type": "object",
+                  },
+                  {
+                    "tag": "bk-button",
                     "properties": {
-                      "priority": {
-                        "description": {
-                          "en": "Must be an unique integer",
-                          "it": "Deve essere un numero intero unico"
-                        },
-                        "label": {
-                          "en": "Priority",
-                          "it": "Priorità"
-                        },
-                        "type": "integer",
-                        "minimum": 0
-                      },
-                      "ruleId": {
-                        "description": {
-                          "en": "Must be unique",
-                          "it": "Deve essere un valore unico"
-                        },
-                        "label": {
-                          "en": "Rule ID",
-                          "it": "ID Regola"
-                        },
-                        "type": "string"
-                      },
-                      "enabledMethods": {
-                        "label": {
-                          "en": "Payment methods enabled",
-                          "it": "Metodi di pagamento abilitati"
-                        },
-                        "type": "array",
-                        "dataSchema": {
-                          "type": "object",
-                          "properties": {
-                            "paymentMethod": {
-                              "description": {
-                                "en": "Must be valid for the associated provider",
-                                "it": "Deve essere un valore valido per il provider"
-                              },
-                              "type": "string",
-                              "enum": [
-                                "Apple Pay",
-                                "Credit Card",
-                                "Google Pay",
-                                "PayPal",
-                                "SafeCharge",
-                                "Satispay",
-                                "Scalapay",
-                                "Soisy",
-                                "Stripe"
-                              ],
-                              "label": {
-                                "en": "Payment method",
-                                "it": "Metodo di pagamento"
-                              }
-                            },
-                            "provider": {
-                              "description": {
-                                "en": "Must be an enabled provider",
-                                "it": "Deve essere un provider abilitato"
-                              },
-                              "type": "string",
-                              "enum": [
-                                "Adyen",
-                                "Axerve",
-                                "Braintree",
-                                "SafeCharge",
-                                "Satispay",
-                                "Scalapay",
-                                "Soisy",
-                                "Stripe",
-                                "Unicredit"
-                              ],
-                              "label": {
-                                "en": "Provider",
-                                "it": "Provider"
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "amount": {
-                        "label": {
-                          "en": "Amount",
-                          "it": "Importo"
-                        },
-                        "type": "object",
-                        "dataSchema": {
-                          "type": "object",
-                          "properties": {
-                            "min": {
-                              "description": {
-                                "en": "Must be greater than 0",
-                                "it": "Deve essere maggiore di 0"
-                              },
-                              "label": {
-                                "en": "Min",
-                                "it": "Min"
-                              },
-                              "type": "number",
-                              "format": "currency",
-                              "minimum": 0,
-                              "formOptions": {
-                                "template": {
-                                  "en": "€ {{value}}",
-                                  "it": "{{value}} €"
-                                }
-                              }
-                            },
-                            "max": {
-                              "description": {
-                                "en": "Must be greater than the Min value",
-                                "it": "Deve essere maggiore del valore Minimo"
-                              },
-                              "label": {
-                                "en": "Max",
-                                "it": "Max"
-                              },
-                              "type": "number",
-                              "format": "currency",
-                              "minimum": 0,
-                              "formOptions": {
-                                "template": {
-                                  "en": "€ {{value}}",
-                                  "it": "{{value}} €"
-                                }
-                              }
-                            },
-                            "currency": {
-                              "description": {
-                                "en": "Currency",
-                                "it": "Valuta"
-                              },
-                              "label": {
-                                "en": "Currency",
-                                "it": "Valuta"
-                              },
-                              "type": "string",
-                              "enum": [
-                                "EUR"
-                              ]
-                            }
-                          }
-                        }
-                      },
-                      "matchInValues": {
-                        "label": {
-                          "en": "Custom rules",
-                          "it": "Regole personalizzate"
-                        },
-                        "type": "array",
-                        "dataSchema": {
-                          "type": "object",
-                          "properties": {
-                            "key": {
-                              "label": {
-                                "en": "Entity",
-                                "it": "Entità"
-                              },
-                              "type": "string",
-                              "enum": [
-                                "Product Category",
-                                "Channel",
-                                "User Type"
-                              ]
-                            },
-                            "values": {
-                              "description": {
-                                "en": "To define multiple values separate them with a comma, no trailing spaces (e.g. \"x,y,z\")",
-                                "it": "Per definire più valori usare la virgola come separatore, senza spazi (e.g. \"x,y,z\")"
-                              },
-                              "label": {
-                                "en": "Values",
-                                "it": "Valori"
-                              },
-                              "type": "string",
-                              "formOptions": {
-                                "placeholder": "Multiple values separated by comma: \"x,y,z\""
-                              }
-                            }
-                          }
+                      "content": "",
+                      "iconId": "fas fa-arrow-right",
+                      "iconPlacement": "right",
+                      "clickConfig": {
+                        "type": "push",
+                        "actionConfig": {
+                          "url": "./rule/{{args.[1]._id}}"
                         }
                       }
                     }
-                  },
-                  "customLabels": {
-                    "create": {
-                      "title": {
-                        "en": "Add Rule",
-                        "it": "Aggiungi Regola"
-                      }
-                    }
-                  },
-                  "extraEndpoint": "/pgm-bff/adaptive-checkout/rule-details/add",
-                  "afterFinishEvents": {
-                    "label": "change-query",
-                    "payload": {}
-                  },
-                  "wizard": [
-                    {
-                      "keys": [
-                        "priority",
-                        "ruleId"
-                      ],
-                      "labels": {
-                        "stepperTitle": {
-                          "en": "Overview",
-                          "it": "Dettaglio Regola"
-                        }
-                      }
-                    },
-                    {
-                      "keys": [
-                        "enabledMethods"
-                      ],
-                      "labels": {
-                        "wizardAddNew": {
-                          "en": "Add Payment method",
-                          "it": "Aggiungi metodo di pagamento"
-                        },
-                        "stepperTitle": {
-                          "en": "Payment methods enabled",
-                          "it": "Metodi di pagamento abilitati"
-                        },
-                        "accordionHeader": {
-                          "en": "Payment method",
-                          "it": "Metodo di pagamento"
-                        },
-                        "accordionEmptyComponent": {
-                          "en": "No enabled payment methods",
-                          "it": "Nessun metodo di pagamento abilitato"
-                        }
-                      }
-                    },
-                    {
-                      "keys": [
-                        "amount"
-                      ],
-                      "labels": {
-                        "stepperTitle": {
-                          "en": "Amount",
-                          "it": "Importo"
-                        }
-                      }
-                    },
-                    {
-                      "keys": [
-                        "matchInValues"
-                      ],
-                      "labels": {
-                        "wizardAddNew": {
-                          "en": "Add Custom rule",
-                          "it": "Aggiungi regola personalizzata"
-                        },
-                        "stepperTitle": {
-                          "en": "Custom rules",
-                          "it": "Regole personalizzate"
-                        },
-                        "accordionHeader": {
-                          "en": "Custom Rule",
-                          "it": "Regola personalizzata"
-                        },
-                        "accordionEmptyComponent": {
-                          "en": "No Custom rules",
-                          "it": "Nessuna regola personalizzata"
-                        }
-                      }
-                    }
-                  ]
-                }
+                  }
+                ],
+                "initialSortDirection": "ascend",
+                "initialSortProperty": "priority"
               },
-              {
-                "tag": "bk-confirmation-modal"
-              }
-            ],
-            "tag": "main",
-            "attributes": {
-              "style": "flex-grow: 1; background-color: #f0f2f5; padding: 20px; overflow-y: auto;"
-            }
-          },
-          {
-            "content": [
-              {
-                "properties": {
-                  "dataSchema": {
-                    "$ref": "#/definitions/dataSchema"
-                  },
-                  "width": "40vw"
-                },
-                "tag": "bk-filter-drawer"
-              }
-            ],
-            "tag": "aside"
-          },
-          {
-            "content": [
-              {
-                "tag": "bk-bulk-delete"
-              },
-              {
-                "tag": "bk-pagination",
-                "properties": {
-                  "pageSize": 10
-                }
-              },
-              {
-                "tag": "div",
-                "attributes": {
-                  "style": "flex-grow: 1;"
-                }
-              }
-            ],
-            "tag": "footer",
-            "attributes": {
-              "style": "display: flex; flex-direction: row; flex-wrap: wrap; padding: 10px 20px; background-color: white; gap: 10px; position: sticky; bottom: 0; z-index: 10"
-            }
-          },
-          {
-            "properties": {
-              "basePath": "/adaptive-checkout-view",
-              "dataSchema": {
-                "$ref": "#/definitions/dataSchema"
-              }
+              "tag": "bk-table"
             },
-            "tag": "bk-crud-client"
-          },
-          {
-            "properties": {
-              "rootElementSelectors": "main.micro-lc-layout-content",
-              "successEventMap": {
-                "bk-form-modal-extra-endpoint": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Rule created successfully",
-                    "it": "Regola creata con successo"
-                  },
-                  "type": "success"
+            {
+              "properties": {
+                "requireConfirm": {
+                  "onClose": false,
+                  "onSave": true
                 },
-                "create-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Item successfully created",
-                    "it": "L'elemento è stato creato correttamente"
-                  },
-                  "type": "success"
+                "dataSchema": {
+                  "$ref": "#/definitions/dataSchema"
                 },
-                "update-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Item successfully updated",
-                    "it": "L'elemento è stato aggiornato correttamente"
-                  },
-                  "type": "success"
+                "width": "70vw",
+                "afterFinishEvents": {
+                  "label": "change-query",
+                  "payload": {}
                 },
-                "delete-data": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
+                "wizard": [
+                  {
+                    "keys": [
+                      "priority",
+                      "ruleId",
+                      "type"
+                    ],
+                    "labels": {
+                      "stepperTitle": "Overview",
+                      "stepperSubtitle": "Overview"
+                    }
                   },
-                  "content": {
-                    "en": "Item successfully deleted",
-                    "it": "L'elemento è stato eliminato correttamente"
+                  {
+                    "keys": [
+                      "rules"
+                    ],
+                    "labels": {
+                      "wizardAddNew": {
+                        "en": "Add rule",
+                        "it": "Aggiungi regola"
+                      },
+                      "stepperTitle": {
+                        "en": "Conditions",
+                        "it": "Condizioni"
+                      },
+                      "stepperSubtitle": "Add Rules",
+                      "accordionHeader": {
+                        "en": "Conditions",
+                        "it": "Condizioni"
+                      },
+                      "accordionEmptyComponent": {
+                        "en": "No rules",
+                        "it": "Nessuna regola definita"
+                      }
+                    }
                   },
-                  "type": "success"
+                  {
+                    "keys": [
+                      "response"
+                    ],
+                    "labels": {
+                      "stepperTitle": {
+                        "en": "Response",
+                        "it": "Risposta"
+                      },
+                      "stepperSubtitle": "Response"
+                    }
+                  }
+                ]
+              },
+              "tag": "bk-form-wizard"
+            },
+            {
+              "tag": "bk-confirmation-modal"
+            },
+            {
+              "properties": {
+                "rootElementSelectors": "main.micro-lc-layout-content",
+                "successEventMap": {
+                  "create-data": {
+                    "title": "Success",
+                    "content": "Data successfully created",
+                    "type": "success"
+                  },
+                  "update-data": {
+                    "title": "Success",
+                    "content": "Data successfully updated",
+                    "type": "success"
+                  },
+                  "delete-data": {
+                    "title": "Success",
+                    "content": "Data successfully deleted",
+                    "type": "success"
+                  }
                 },
-                "delete-http-crud": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
+                "errorEventMap": {
+                  "create-data": {
+                    "title": "Error",
+                    "content": "An error occurred during order creation",
+                    "type": "error"
                   },
-                  "content": {
-                    "en": "Item successfully deleted",
-                    "it": "L'elemento è stato eliminato correttamente"
+                  "update-data": {
+                    "title": "Error",
+                    "content": "An error occurred during order updated",
+                    "type": "error"
                   },
-                  "type": "success"
-                },
-                "success": {
-                  "title": {
-                    "en": "Success",
-                    "it": "Successo"
-                  },
-                  "content": {
-                    "en": "Requested action executed successfully",
-                    "it": "L'azione richiesta è stata eseguita con successo"
-                  },
-                  "type": "success"
+                  "delete-data": {
+                    "title": "Error",
+                    "content": "An error occurred during order deletion",
+                    "type": "error"
+                  }
                 }
               },
-              "errorEventMap": {
-                "bk-form-modal-extra-endpoint": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Impossible to create new rule",
-                    "it": "Impossibile create la nuova regola"
-                  },
-                  "type": "error"
-                },
-                "create-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item creation",
-                    "it": "C'è stato un errore durante la creazione dell'elemento"
-                  },
-                  "type": "error"
-                },
-                "update-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item update",
-                    "it": "C'è stato un errore durante l'aggiornamento dell'elemento"
-                  },
-                  "type": "error"
-                },
-                "delete-data": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item deletion",
-                    "it": "C'è stato un errore durante l'eliminazione dell'elemento"
-                  },
-                  "type": "error"
-                },
-                "delete-http-crud": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "An error occurred during item deletion",
-                    "it": "C'è stato un errore durante l'eliminazione dell'elemento"
-                  },
-                  "type": "error"
-                },
-                "error": {
-                  "title": {
-                    "en": "Error",
-                    "it": "Errore"
-                  },
-                  "content": {
-                    "en": "Requested action failed",
-                    "it": "L'azione richiesta è fallita"
-                  },
-                  "type": "error"
-                }
-              }
-            },
-            "tag": "bk-notifications",
-            "attributes": {}
+              "tag": "bk-notifications",
+              "attributes": {}
+            }
+          ],
+          "tag": "main",
+          "attributes": {
+            "style": "flex-grow: 1; background-color: #f0f2f5; padding: 20px; overflow-y: auto;"
           }
-        ],
-        "tag": "div",
-        "attributes": {
-          "style": "width: 100%; height: 100%; display: flex; flex-direction: column; position: relative;"
+        },
+        {
+          "content": [
+            {
+              "properties": {
+                "dataSchema": {
+                  "$ref": "#/definitions/dataSchema"
+                },
+                "width": "40vw"
+              },
+              "tag": "bk-filter-drawer"
+            }
+          ],
+          "tag": "aside"
+        },
+        {
+          "content": [
+            {
+              "tag": "bk-button",
+              "properties": {
+                "content": {
+                  "en": "Delete",
+                  "it": "Elimina"
+                },
+                "disableOnAction": true,
+                "bulkButton": true,
+                "action": {
+                  "type": "event",
+                  "config": {
+                    "events": {
+                      "label": "require-confirm",
+                      "payload": {
+                        "title": {
+                          "en": "Warning",
+                          "it": "Attenzione"
+                        },
+                        "content": {
+                          "en": "Do you want to delete the selected elements?",
+                          "it": "Vuoi eliminare gli elementi selezionati?"
+                        },
+                        "configOk": {
+                          "tag": "bk-button",
+                          "properties": {
+                            "content": {
+                              "en": "Confirm",
+                              "it": "Conferma"
+                            },
+                            "action": {
+                              "type": "event",
+                              "config": {
+                                "events": {
+                                  "label": "http-delete",
+                                  "payload": "{{rawObject selectedData}}"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "iconId": "DeleteOutlined",
+                "iconPlacement": "right",
+                "type": "ghost",
+                "danger": true
+              }
+            },
+            {
+              "tag": "div",
+              "attributes": {
+                "style": "flex-grow: 1;"
+              }
+            },
+            {
+              "tag": "bk-footer",
+              "attributes": {
+                "style": "display: flex; justify-content: end; align-items: center;"
+              },
+              "properties": {
+                "disableStateChange": true
+              }
+            },
+            {
+              "tag": "bk-pagination",
+              "properties": {
+                "pageSize": 10
+              }
+            }
+          ],
+          "tag": "footer",
+          "attributes": {
+            "style": "display: flex; flex-direction: row; flex-wrap: wrap; padding: 10px 20px; background-color: white; gap: 10px; position: sticky; bottom: 0; z-index: 10"
+          }
+        },
+        {
+          "properties": {
+            "basePath": "/v2/adaptive-checkout",
+            "dataSchema": {
+              "$ref": "#/definitions/dataSchema"
+            }
+          },
+          "tag": "bk-crud-client"
         }
-      },
-      "sources": [
-        "https://cdn.jsdelivr.net/npm/@micro-lc/bk-web-components@latest/dist/bk-web-components.esm.js"
-      ]
-    }
+      ],
+      "tag": "div",
+      "attributes": {
+        "style": "width: 100%; height: 100%; display: flex; flex-direction: column; position: relative;"
+      }
+    },
+    "sources": [
+      "https://cdn.mia-platform.eu/backoffice/bk-web-components/{{BACK_KIT_VERSION}}/dist/bk-web-components.esm.js"
+    ]
   }
+}
